@@ -34,13 +34,19 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTANDALONE_DEMO_LIB \
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
                               -Wl,--allow-multiple-definition \
                               -Wl,--whole-archive -fPIE -v")
+###########################################
+MESSAGE(STATUS "Project: libtensorflow_inference")
 
-file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/*.*)
+
+
+#########################################################
+MESSAGE(STATUS "Project: tensorflow_demo")
+file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/demo/*.*)
 add_library(tensorflow_demo SHARED
             ${tensorflow_demo_sources})
 target_include_directories(tensorflow_demo PRIVATE
                            ${TF_SRC_ROOT}
-                           ${CMAKE_SOURCE_DIR})
+                           ${CMAKE_SOURCE_DIR}/demo/)
 
 target_link_libraries(tensorflow_demo
                       android
