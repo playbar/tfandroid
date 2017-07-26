@@ -25,11 +25,11 @@ get_filename_component(SAMPLE_SRC_DIR  ${CMAKE_SOURCE_DIR}  ABSOLUTE)
 if (ANDROID_ABI MATCHES "^armeabi-v7a$")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfloat-abi=softfp -mfpu=neon")
 elseif(ANDROID_ABI MATCHES "^arm64-v8a")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -ftree-vectorize")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -ftree-vectorize")
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTANDALONE_DEMO_LIB \
-                    -std=c++11 -fno-exceptions -fno-rtti -O2 -Wno-narrowing \
+                    -std=c++11 -fno-exceptions -fno-rtti -O4 -Wno-narrowing \
                     -fPIE")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
                               -Wl,--allow-multiple-definition \
