@@ -44,6 +44,7 @@ add_library(tensorflow_inference SHARED
             tensorflow/java/src/main/native/session_jni.cc
             tensorflow/java/src/main/native/tensor_jni.cc
             tensorflow/java/src/main/native/tensorflow_jni.cc
+            tensorflow/core/platform/default/logging.cc
             tensorflow/c/c_api.cc
             )
 
