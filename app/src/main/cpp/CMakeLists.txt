@@ -28,7 +28,8 @@ endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTANDALONE_DEMO_LIB \
                     -std=c++11 -fno-exceptions -frtti -O2 -Wno-narrowing \
-                    -fPIE")
+                    -fPIE \
+                    -DHAVE_PTHREAD")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
                               -Wl,--allow-multiple-definition \
                               -Wl,--whole-archive -fPIE -v")
@@ -45,6 +46,43 @@ add_library(tensorflow_inference SHARED
             tensorflow/java/src/main/native/tensor_jni.cc
             tensorflow/java/src/main/native/tensorflow_jni.cc
             tensorflow/core/platform/default/logging.cc
+            tensorflow/core/framework/tensor_shape.cc
+            tensorflow/core/lib/core/status.cc
+            tensorflow/core/lib/strings/strcat.cc
+            tensorflow/core/lib/strings/stringprintf.cc
+            tensorflow/core/framework/attr_value.pb.cc
+            tensorflow/core/framework/tensor_shape.pb.cc
+            tensorflow/core/framework/op_def.pb.cc
+            tensorflow/core/framework/tensor.pb.cc
+            tensorflow/core/framework/types.pb.cc
+            tensorflow/core/framework/resource_handle.pb.cc
+            tensorflow/core/platform/posix/port.cc
+            tensorflow/core/lib/strings/numbers.cc
+            third_party/protobuf/google/protobuf/message.cc
+            third_party/protobuf/google/protobuf/stubs/once.cc
+            third_party/protobuf/google/protobuf/generated_message_util.cc
+            third_party/protobuf/google/protobuf/wire_format_lite.cc
+            third_party/protobuf/google/protobuf/stubs/common.cc
+            third_party/protobuf/google/protobuf/arena.cc
+            third_party/protobuf/google/protobuf/io/coded_stream.cc
+            third_party/protobuf/google/protobuf/map_field.cc
+            third_party/protobuf/google/protobuf/descriptor.cc
+            third_party/protobuf/google/protobuf/descriptor.pb.cc
+            third_party/protobuf/google/protobuf/generated_message_reflection.cc
+            third_party/protobuf/google/protobuf/io/zero_copy_stream_impl.cc
+            third_party/protobuf/google/protobuf/stubs/strutil.cc
+            third_party/protobuf/google/protobuf/message_lite.cc
+            third_party/protobuf/google/protobuf/reflection_ops.cc
+            third_party/protobuf/google/protobuf/unknown_field_set.cc
+            third_party/protobuf/google/protobuf/wire_format.cc
+            third_party/protobuf/google/protobuf/stubs/structurally_valid.cc
+            third_party/protobuf/google/protobuf/stubs/status.cc
+            third_party/protobuf/google/protobuf/descriptor_database.cc
+            third_party/protobuf/google/protobuf/stubs/int128.cc
+            third_party/protobuf/google/protobuf/stubs/stringprintf.cc
+            third_party/protobuf/google/protobuf/stubs/substitute.cc
+            third_party/protobuf/google/protobuf/io/strtod.cc
+            third_party/protobuf/google/protobuf/dynamic_message.cc
             tensorflow/c/c_api.cc
             )
 
