@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\MyWorks\\github\\tensorflow\\tensorflow\\examples\\android\\gradleBuild\\intermediates\\res\\merged\\debug\\layout\\camera_connection_fragment.xml",
+        "source": "D:\\MyWorks\\github\\tensorflow\\tensorflow\\examples\\android\\res\\layout\\camera_connection_fragment.xml"
+    },
+    {
+        "merged": "D:\\MyWorks\\github\\tensorflow\\tensorflow\\examples\\android\\gradleBuild\\intermediates\\res\\merged\\debug\\layout\\camera_connection_fragment_stylize.xml",
+        "source": "D:\\MyWorks\\github\\tensorflow\\tensorflow\\examples\\android\\res\\layout\\camera_connection_fragment_stylize.xml"
+    },
+    {
+        "merged": "D:\\MyWorks\\github\\tensorflow\\tensorflow\\examples\\android\\gradleBuild\\intermediates\\res\\merged\\debug\\layout\\activity_camera.xml",
+        "source": "D:\\MyWorks\\github\\tensorflow\\tensorflow\\examples\\android\\res\\layout\\activity_camera.xml"
+    },
+    {
+        "merged": "D:\\MyWorks\\github\\tensorflow\\tensorflow\\examples\\android\\gradleBuild\\intermediates\\res\\merged\\debug\\layout\\camera_connection_fragment_tracking.xml",
+        "source": "D:\\MyWorks\\github\\tensorflow\\tensorflow\\examples\\android\\res\\layout\\camera_connection_fragment_tracking.xml"
+    }
+]

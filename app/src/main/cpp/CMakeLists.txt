@@ -19,8 +19,6 @@ cmake_minimum_required(VERSION 3.4.1)
 
 set(CMAKE_VERBOSE_MAKEFILE on)
 
-get_filename_component(TF_SRC_ROOT ${CMAKE_SOURCE_DIR}/../../../..  ABSOLUTE)
-get_filename_component(SAMPLE_SRC_DIR  ${CMAKE_SOURCE_DIR}  ABSOLUTE)
 
 if (ANDROID_ABI MATCHES "^armeabi-v7a$")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfloat-abi=softfp -mfpu=neon")
@@ -29,23 +27,48 @@ elseif(ANDROID_ABI MATCHES "^arm64-v8a")
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTANDALONE_DEMO_LIB \
-                    -std=c++11 -fno-exceptions -fno-rtti -O4 -Wno-narrowing \
+                    -std=c++11 -fno-exceptions -frtti -O2 -Wno-narrowing \
                     -fPIE")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
                               -Wl,--allow-multiple-definition \
                               -Wl,--whole-archive -fPIE -v")
 ###########################################
-MESSAGE(STATUS "Project: libtensorflow_inference")
+MESSAGE(STATUS "Project: tensorflow_inference")
 
+add_library(tensorflow_inference SHARED
+            tensorflow/java/src/main/native/exception_jni.cc
+            tensorflow/java/src/main/native/graph_jni.cc
+            tensorflow/java/src/main/native/operation_builder_jni.cc
+            tensorflow/java/src/main/native/operation_jni.cc
+            tensorflow/java/src/main/native/saved_model_bundle_jni.cc
+            tensorflow/java/src/main/native/session_jni.cc
+            tensorflow/java/src/main/native/tensor_jni.cc
+            tensorflow/java/src/main/native/tensorflow_jni.cc
+            tensorflow/c/c_api.cc
+            )
 
+target_include_directories(tensorflow_inference PRIVATE
+                           ${CMAKE_SOURCE_DIR}/
+                           ${CMAKE_SOURCE_DIR}/third_party/eigen3
+                           ${CMAKE_SOURCE_DIR}/third_party/protobuf
+                           )
+
+target_link_libraries(tensorflow_inference
+                      android
+                      log
+                      jnigraphics
+                      m
+                      atomic
+                      z)
 
 #########################################################
 MESSAGE(STATUS "Project: tensorflow_demo")
+
+get_filename_component(SAMPLE_SRC_DIR  ${CMAKE_SOURCE_DIR}  ABSOLUTE)
 file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/demo/*.*)
 add_library(tensorflow_demo SHARED
             ${tensorflow_demo_sources})
 target_include_directories(tensorflow_demo PRIVATE
-                           ${TF_SRC_ROOT}
                            ${CMAKE_SOURCE_DIR}/demo/)
 
 target_link_libraries(tensorflow_demo
