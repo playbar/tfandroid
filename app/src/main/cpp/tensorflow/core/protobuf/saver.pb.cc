@@ -78,7 +78,7 @@ void protobuf_AssignDescriptors() {
       file_level_metadata, file_level_enum_descriptors, NULL);
 }
 
-void protobuf_AssignDescriptorsOnce() {
+GOOGLE_ATTRIBUTE_NOINLINE void protobuf_AssignDescriptorsOnce() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
 }
@@ -103,7 +103,7 @@ void TableStruct::InitDefaultsImpl() {
   _SaverDef_default_instance_.DefaultConstruct();
 }
 
-void InitDefaults() {
+GOOGLE_ATTRIBUTE_NOINLINE void InitDefaults() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &TableStruct::InitDefaultsImpl);
 }
@@ -128,7 +128,7 @@ void AddDescriptorsImpl() {
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
 }
 
-void AddDescriptors() {
+GOOGLE_ATTRIBUTE_NOINLINE void AddDescriptors() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
 }

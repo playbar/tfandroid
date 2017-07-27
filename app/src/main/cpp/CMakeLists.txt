@@ -47,7 +47,25 @@ add_library(tensorflow_inference SHARED
             tensorflow/java/src/main/native/tensorflow_jni.cc
             tensorflow/core/platform/default/logging.cc
             tensorflow/core/framework/tensor_shape.cc
+            tensorflow/core/framework/tensor.cc
+            tensorflow/core/framework/resource_handle.cc
+            tensorflow/core/framework/types.cc
+            tensorflow/core/framework/log_memory.cc
+            tensorflow/core/framework/allocator.cc
+            tensorflow/core/platform/tensor_coding.cc
+            tensorflow/core/platform/variant_coding.cc
+            tensorflow/core/lib/strings/str_util.cc
+            tensorflow/core/lib/core/coding.cc
+            tensorflow/core/lib/core/stringpiece.cc
+            tensorflow/core/framework/allocator_registry.cc
+            tensorflow/core/framework/tracking_allocator.cc
+            tensorflow/core/graph/graph.cc
+            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/graph/edgeset.cc
             tensorflow/core/lib/core/status.cc
+            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/lib/hash/hash.cc
+            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/lib/core/arena.cc
+            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/node_def_util.cc
+            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/attr_value_util.cc
             tensorflow/core/lib/strings/strcat.cc
             tensorflow/core/lib/strings/stringprintf.cc
             tensorflow/core/framework/attr_value.pb.cc
@@ -56,6 +74,14 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/tensor.pb.cc
             tensorflow/core/framework/types.pb.cc
             tensorflow/core/framework/resource_handle.pb.cc
+            tensorflow/core/framework/tensor_description.pb.cc
+            tensorflow/core/framework/allocation_description.pb.cc
+            tensorflow/core/framework/log_memory.pb.cc
+            tensorflow/core/framework/graph.pb.cc
+            tensorflow/core/protobuf/config.pb.cc
+            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/node_def.pb.cc
+            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/function.pb.cc
+            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/versions.pb.cc
             tensorflow/core/platform/posix/port.cc
             tensorflow/core/lib/strings/numbers.cc
             third_party/protobuf/google/protobuf/message.cc
@@ -83,6 +109,15 @@ add_library(tensorflow_inference SHARED
             third_party/protobuf/google/protobuf/stubs/substitute.cc
             third_party/protobuf/google/protobuf/io/strtod.cc
             third_party/protobuf/google/protobuf/dynamic_message.cc
+            third_party/protobuf/google/protobuf/io/tokenizer.cc
+            third_party/protobuf/google/protobuf/io/zero_copy_stream_impl_lite.cc
+            third_party/protobuf/google/protobuf/text_format.cc
+            third_party/protobuf/google/protobuf/stubs/stringpiece.cc
+            third_party/protobuf/google/protobuf/extension_set.cc
+            third_party/protobuf/google/protobuf/extension_set_heavy.cc
+            third_party/protobuf/google/protobuf/io/zero_copy_stream.cc
+            third_party/protobuf/google/protobuf/repeated_field.cc
+            third_party/protobuf/google/protobuf/any.cc
             tensorflow/c/c_api.cc
             )
 

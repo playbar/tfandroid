@@ -193,7 +193,7 @@ void protobuf_AssignDescriptors() {
 file_level_metadata[5].reflection = ConfigProto::ConfigProto_DeviceCountEntry::CreateReflection(file_level_metadata[5].descriptor, _ConfigProto_DeviceCountEntry_default_instance_.get_mutable());
 }
 
-void protobuf_AssignDescriptorsOnce() {
+GOOGLE_ATTRIBUTE_NOINLINE void protobuf_AssignDescriptorsOnce() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
 }
@@ -267,7 +267,7 @@ void TableStruct::InitDefaultsImpl() {
       ::tensorflow::CostGraphDef::internal_default_instance());
 }
 
-void InitDefaults() {
+GOOGLE_ATTRIBUTE_NOINLINE void InitDefaults() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &TableStruct::InitDefaultsImpl);
 }
@@ -352,7 +352,7 @@ void AddDescriptorsImpl() {
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
 }
 
-void AddDescriptors() {
+GOOGLE_ATTRIBUTE_NOINLINE void AddDescriptors() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
 }
