@@ -146,6 +146,68 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/util/memmapped_file_system.pb_text.cc
             tensorflow/core/platform/posix/port.cc
             tensorflow/core/lib/strings/numbers.cc
+            tensorflow/core/lib/random/random.cc
+            tensorflow/core/util/padding.cc
+            tensorflow/core/util/saved_tensor_slice.pb_text.cc
+            tensorflow/core/util/tensor_slice_reader_cache.cc
+            tensorflow/core/framework/cancellation.cc
+            tensorflow/core/protobuf/debug.pb.cc
+            tensorflow/core/framework/graph_transfer_info.pb.cc
+            tensorflow/core/protobuf/rewriter_config.pb.cc
+            tensorflow/core/framework/node_def.pb_text.cc
+            tensorflow/core/common_runtime/device_factory.cc
+            tensorflow/core/util/tensor_slice_reader.cc
+            tensorflow/core/util/saved_tensor_slice.pb.cc
+            tensorflow/core/framework/cost_graph.pb_text.cc
+            tensorflow/core/lib/core/error_codes.pb.cc
+            tensorflow/core/framework/kernel_def.pb_text.cc
+            tensorflow/core/protobuf/saver.pb.cc
+            tensorflow/core/framework/graph.pb_text.cc
+            tensorflow/core/framework/memory_types.cc
+            tensorflow/core/common_runtime/step_stats_collector.cc
+            tensorflow/core/platform/denormal.cc
+            tensorflow/core/platform/setround.cc
+            tensorflow/core/framework/tensor_reference.cc
+            tensorflow/core/util/memmapped_file_system.pb.cc
+            tensorflow/core/framework/device_attributes.pb_text.cc
+            tensorflow/core/util/saved_tensor_slice_util.cc
+            tensorflow/core/framework/tensor_slice.cc
+            tensorflow/core/util/tensor_slice_set.cc
+            tensorflow/core/framework/op_def.pb_text.cc
+            tensorflow/core/lib/strings/ordered_code.cc
+            tensorflow/core/framework/device_attributes.pb.cc
+            tensorflow/core/graph/costmodel.cc
+            tensorflow/core/common_runtime/costmodel_manager.cc
+            tensorflow/core/framework/graph_transfer_info.pb_text.cc
+            tensorflow/core/framework/tensor_description.pb_text.cc
+            tensorflow/core/framework/function.pb_text.cc
+            tensorflow/core/framework/step_stats.pb_text.cc
+            tensorflow/core/framework/versions.pb_text.cc
+            tensorflow/core/protobuf/device_properties.pb.cc
+            tensorflow/core/protobuf/tensor_bundle.pb.cc
+            tensorflow/core/framework/resource_handle.pb_text.cc
+            tensorflow/core/framework/tensor.pb_text.cc
+            tensorflow/core/framework/reader_base.pb_text.cc
+            tensorflow/core/framework/variable.pb_text.cc
+            tensorflow/core/lib/io/table.cc
+            tensorflow/core/framework/reader_base.pb.cc
+            tensorflow/core/framework/log_memory.pb_text.cc
+            tensorflow/core/lib/io/block.cc
+            tensorflow/core/lib/io/format.cc
+            tensorflow/core/framework/variable.pb.cc
+            tensorflow/core/framework/allocation_description.pb_text.cc
+            tensorflow/core/framework/tensor_slice.pb_text.cc
+            tensorflow/core/lib/hash/crc32c.cc
+            tensorflow/core/lib/io/iterator.cc
+            tensorflow/core/lib/io/two_level_iterator.cc
+            tensorflow/core/lib/hash/crc32c_accelerate.cc
+            tensorflow/core/framework/summary.pb_text.cc
+            tensorflow/core/framework/attr_value.pb_text.cc
+            tensorflow/core/framework/remote_fused_graph_execute_info.pb_text.cc
+            tensorflow/core/framework/summary.pb.cc
+            tensorflow/core/framework/tensor_shape.pb_text.cc
+            tensorflow/core/framework/remote_fused_graph_execute_info.pb.cc
+            tensorflow/core/util/mirror_pad_mode.cc
             third_party/protobuf/google/protobuf/message.cc
             third_party/protobuf/google/protobuf/stubs/once.cc
             third_party/protobuf/google/protobuf/generated_message_util.cc
