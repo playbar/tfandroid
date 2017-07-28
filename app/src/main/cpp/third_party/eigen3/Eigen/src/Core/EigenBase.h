@@ -14,7 +14,6 @@
 namespace Eigen {
 
 /** \class EigenBase
-  * \ingroup Core_Module
   * 
   * Common base class for all classes T such that MatrixBase has an operator=(T) and a constructor MatrixBase(T).
   *

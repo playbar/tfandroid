@@ -47,7 +47,6 @@ template<typename MatrixType, unsigned int _Mode> class SparseSelfAdjointView
     
     enum {
       Mode = _Mode,
-      TransposeMode = ((Mode & Upper) ? Lower : 0) | ((Mode & Lower) ? Upper : 0),
       RowsAtCompileTime = internal::traits<SparseSelfAdjointView>::RowsAtCompileTime,
       ColsAtCompileTime = internal::traits<SparseSelfAdjointView>::ColsAtCompileTime
     };
@@ -369,7 +368,7 @@ struct generic_product_impl<Lhs, RhsView, DenseShape, SparseSelfAdjointShape, Pr
     
     // transpose everything
     Transpose<Dest> dstT(dst);
-    internal::sparse_selfadjoint_time_dense_product<RhsView::TransposeMode>(rhsNested.transpose(), lhsNested.transpose(), dstT, alpha);
+    internal::sparse_selfadjoint_time_dense_product<RhsView::Mode>(rhsNested.transpose(), lhsNested.transpose(), dstT, alpha);
   }
 };
 

@@ -21,12 +21,19 @@ template <typename Environment>
 class SimpleThreadPoolTempl : public ThreadPoolInterface {
  public:
   // Construct a pool that contains "num_threads" threads.
-  explicit SimpleThreadPoolTempl(int num_threads, Environment env = Environment())
+  SimpleThreadPoolTempl(int num_threads, Environment env = Environment())
       : env_(env), threads_(num_threads), waiters_(num_threads) {
     for (int i = 0; i < num_threads; i++) {
       threads_.push_back(env.CreateThread([this, i]() { WorkerLoop(i); }));
     }
   }
+
+    SimpleThreadPoolTempl(int num_threads, bool low_latency_hint, Environment env = Environment())
+            : env_(env), threads_(num_threads), waiters_(num_threads) {
+      for (int i = 0; i < num_threads; i++) {
+        threads_.push_back(env.CreateThread([this, i]() { WorkerLoop(i); }));
+      }
+    }
 
   // Wait until all scheduled work has finished and then destroy the
   // set of threads.
@@ -69,6 +76,14 @@ class SimpleThreadPoolTempl : public ThreadPoolInterface {
     }
   }
 
+  void Cancel() {
+#ifdef EIGEN_THREAD_ENV_SUPPORTS_CANCELLATION
+    for (size_t i = 0; i < threads_.size(); i++) {
+      threads_[i]->OnCancel();
+    }
+#endif
+  }
+
   int NumThreads() const final {
     return static_cast<int>(threads_.size());
   }
@@ -98,7 +113,9 @@ class SimpleThreadPoolTempl : public ThreadPoolInterface {
         while (!w.ready) {
           w.cv.wait(l);
         }
-        t = w.task;
+//          LOGE("file:%s, L:%d", __FILE__, __LINE__);
+          assert(false);
+//        t = w.task;
         w.task.f = nullptr;
       } else {
         // Pick up pending work

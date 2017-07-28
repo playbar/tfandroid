@@ -109,6 +109,7 @@ template<typename T, int Value> class variable_if_dynamic
     EIGEN_EMPTY_STRUCT_CTOR(variable_if_dynamic)
     EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE explicit variable_if_dynamic(T v) { EIGEN_ONLY_USED_FOR_DEBUG(v); eigen_assert(v == T(Value)); }
     EIGEN_DEVICE_FUNC static EIGEN_STRONG_INLINE T value() { return T(Value); }
+    EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE operator T() const { return T(Value); }
     EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE void setValue(T) {}
 };
 
@@ -119,6 +120,7 @@ template<typename T> class variable_if_dynamic<T, Dynamic>
   public:
     EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE explicit variable_if_dynamic(T value) : m_value(value) {}
     EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE T value() const { return m_value; }
+    EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE operator T() const { return m_value; }
     EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE void setValue(T value) { m_value = value; }
 };
 
@@ -671,7 +673,7 @@ bool is_same_dense(const T1 &, const T2 &, typename enable_if<!(has_direct_acces
 
 // Internal helper defining the cost of a scalar division for the type T.
 // The default heuristic can be specialized for each scalar type and architecture.
-template<typename T,bool Vectorized=false,typename EnaleIf = void>
+template<typename T,bool Vectorized=false,typename EnableIf = void>
 struct scalar_div_cost {
   enum { value = 8*NumTraits<T>::MulCost };
 };

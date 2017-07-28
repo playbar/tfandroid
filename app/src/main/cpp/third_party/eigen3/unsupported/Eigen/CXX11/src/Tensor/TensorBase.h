@@ -186,6 +186,12 @@ class TensorBase<Derived, ReadOnlyAccessors>
     }
 
     EIGEN_DEVICE_FUNC
+    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<internal::scalar_expm1_op<Scalar>, const Derived>
+    expm1() const {
+      return unaryExpr(internal::scalar_expm1_op<Scalar>());
+    }
+
+    EIGEN_DEVICE_FUNC
     EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<internal::scalar_log_op<Scalar>, const Derived>
     log() const {
       return unaryExpr(internal::scalar_log_op<Scalar>());
@@ -613,7 +619,7 @@ class TensorBase<Derived, ReadOnlyAccessors>
       const array<Index, NumDimensions>, const Derived>
     argmax() const {
       array<Index, NumDimensions> in_dims;
-      for (int d = 0; d < NumDimensions; ++d) in_dims[d] = d;
+      for (Index d = 0; d < NumDimensions; ++d) in_dims[d] = d;
       return TensorTupleReducerOp<
         internal::ArgMaxTupleReducer<Tuple<Index, CoeffReturnType> >,
         const array<Index, NumDimensions>,
@@ -626,7 +632,7 @@ class TensorBase<Derived, ReadOnlyAccessors>
       const array<Index, NumDimensions>, const Derived>
     argmin() const {
       array<Index, NumDimensions> in_dims;
-      for (int d = 0; d < NumDimensions; ++d) in_dims[d] = d;
+      for (Index d = 0; d < NumDimensions; ++d) in_dims[d] = d;
       return TensorTupleReducerOp<
         internal::ArgMinTupleReducer<Tuple<Index, CoeffReturnType> >,
         const array<Index, NumDimensions>,
@@ -637,7 +643,7 @@ class TensorBase<Derived, ReadOnlyAccessors>
     const TensorTupleReducerOp<
       internal::ArgMaxTupleReducer<Tuple<Index, CoeffReturnType> >,
       const array<Index, 1>, const Derived>
-    argmax(const int return_dim) const {
+    argmax(const Index return_dim) const {
       array<Index, 1> in_dims;
       in_dims[0] = return_dim;
       return TensorTupleReducerOp<
@@ -650,7 +656,7 @@ class TensorBase<Derived, ReadOnlyAccessors>
     const TensorTupleReducerOp<
       internal::ArgMinTupleReducer<Tuple<Index, CoeffReturnType> >,
       const array<Index, 1>, const Derived>
-    argmin(const int return_dim) const {
+    argmin(const Index return_dim) const {
       array<Index, 1> in_dims;
       in_dims[0] = return_dim;
       return TensorTupleReducerOp<

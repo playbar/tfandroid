@@ -22,6 +22,7 @@ limitations under the License.
 #include <vector>
 
 #include "tensorflow/core/framework/tensor.h"
+#include "tensorflow/core/framework/tensor.pb.h"
 #include "tensorflow/core/platform/protobuf.h"
 
 namespace tensorflow {

@@ -29,7 +29,8 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTANDALONE_DEMO_LIB \
                     -std=c++11 -fno-exceptions -frtti -O2 -Wno-narrowing \
                     -fPIE \
-                    -DHAVE_PTHREAD")
+                    -DHAVE_PTHREAD \
+                    -DEIGEN_USE_SIMPLE_THREAD_POOL")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
                               -Wl,--allow-multiple-definition \
                               -Wl,--whole-archive -fPIE -v")
@@ -57,15 +58,55 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/lib/strings/str_util.cc
             tensorflow/core/lib/core/coding.cc
             tensorflow/core/lib/core/stringpiece.cc
+            tensorflow/core/graph/node_builder.cc
             tensorflow/core/framework/allocator_registry.cc
             tensorflow/core/framework/tracking_allocator.cc
             tensorflow/core/graph/graph.cc
-            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/graph/edgeset.cc
+            tensorflow/core/common_runtime/session.cc
+            tensorflow/core/graph/subgraph.cc
+            tensorflow/core/common_runtime/session_factory.cc
+            tensorflow/core/common_runtime/session_options.cc
+            tensorflow/core/common_runtime/shape_refiner.cc
+            tensorflow/core/graph/edgeset.cc
+            tensorflow/core/graph/graph_constructor.cc
+            tensorflow/core/platform/env.cc
+             tensorflow/core/platform/posix/env.cc
+            tensorflow/core/platform/posix/load_library.cc
+            tensorflow/core/platform/protobuf_util.cc
+            tensorflow/core/framework/load_library.cc
+            tensorflow/core/framework/op.cc
+            tensorflow/core/framework/tensor_slice.pb.cc
+            tensorflow/core/framework/function.cc
+            tensorflow/core/protobuf/queue_runner.pb_text.cc
             tensorflow/core/lib/core/status.cc
-            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/lib/hash/hash.cc
-            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/lib/core/arena.cc
-            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/node_def_util.cc
-            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/attr_value_util.cc
+            tensorflow/core/lib/io/path.cc
+            tensorflow/core/util/equal_graph_def.cc
+            tensorflow/core/lib/hash/hash.cc
+            tensorflow/core/lib/core/arena.cc
+            tensorflow/core/lib/strings/scanner.cc
+            tensorflow/core/framework/node_def_util.cc
+            tensorflow/core/framework/attr_value_util.cc
+            tensorflow/core/framework/op_def_util.cc
+            tensorflow/core/framework/op_def_util.cc
+            tensorflow/core/framework/node_def_builder.cc
+            tensorflow/core/framework/shape_inference.cc
+            tensorflow/core/framework/variant.cc
+            tensorflow/core/common_runtime/graph_runner.cc
+            tensorflow/core/framework/common_shape_fns.cc
+            tensorflow/core/framework/versions.cc
+            tensorflow/core/graph/algorithm.cc
+            tensorflow/core/graph/tensor_id.cc
+            tensorflow/core/platform/env_time.cc
+            tensorflow/core/platform/posix/env_time.cc
+            tensorflow/core/platform/file_system.cc
+            tensorflow/core/platform/posix/posix_file_system.cc
+            tensorflow/core/framework/op_kernel.cc
+            tensorflow/core/framework/op_def_builder.cc
+            tensorflow/core/lib/strings/proto_text_util.cc
+            tensorflow/core/framework/rendezvous.cc
+            tensorflow/core/common_runtime/executor.cc
+            tensorflow/core/framework/tensor_util.cc
+            tensorflow/core/common_runtime/executor.cc
             tensorflow/core/lib/strings/strcat.cc
             tensorflow/core/lib/strings/stringprintf.cc
             tensorflow/core/framework/attr_value.pb.cc
@@ -79,9 +120,30 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/log_memory.pb.cc
             tensorflow/core/framework/graph.pb.cc
             tensorflow/core/protobuf/config.pb.cc
-            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/node_def.pb.cc
-            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/function.pb.cc
-            D:/MyWorks/github/TFandroid/app/src/main/cpp/tensorflow/core/framework/versions.pb.cc
+            tensorflow/core/util/tensor_format.cc
+            tensorflow/core/lib/core/threadpool.cc
+            tensorflow/core/platform/posix/error.cc
+            tensorflow/core/framework/unique_tensor_references.cc
+            tensorflow/core/framework/kernel_def.pb.cc
+            tensorflow/core/util/memmapped_file_system.pb_text.cc
+            tensorflow/core/util/device_name_utils.cc
+            tensorflow/core/protobuf/cluster.pb.cc
+            tensorflow/core/framework/step_stats.pb.cc
+            tensorflow/core/framework/cost_graph.pb.cc
+            tensorflow/core/framework/node_def.pb.cc
+            tensorflow/core/framework/function.pb.cc
+            tensorflow/core/framework/versions.pb.cc
+            tensorflow/core/protobuf/queue_runner.pb.cc
+            tensorflow/core/lib/core/error_codes.pb_text.cc
+            tensorflow/core/framework/types.pb_text.cc
+            tensorflow/core/protobuf/device_properties.pb_text.cc
+            tensorflow/core/protobuf/tensor_bundle.pb_text.cc
+            tensorflow/core/protobuf/saver.pb_text.cc
+            tensorflow/core/protobuf/config.pb_text.cc
+            tensorflow/core/protobuf/debug.pb_text.cc
+            tensorflow/core/protobuf/rewriter_config.pb_text.cc
+            tensorflow/core/protobuf/cluster.pb_text.cc
+            tensorflow/core/util/memmapped_file_system.pb_text.cc
             tensorflow/core/platform/posix/port.cc
             tensorflow/core/lib/strings/numbers.cc
             third_party/protobuf/google/protobuf/message.cc

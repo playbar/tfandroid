@@ -11,6 +11,7 @@
 #define EIGEN_USE_THREADS
 #include "main.h"
 #include "Eigen/CXX11/ThreadPool"
+#include "Eigen/CXX11/Tensor"
 
 static void test_create_destroy_empty_pool()
 {
@@ -22,11 +23,11 @@ static void test_create_destroy_empty_pool()
 }
 
 
-static void test_parallelism()
+static void test_parallelism(bool allow_spinning)
 {
   // Test we never-ever fail to match available tasks with idle threads.
   const int kThreads = 16;  // code below expects that this is a multiple of 4
-  NonBlockingThreadPool tp(kThreads);
+  NonBlockingThreadPool tp(kThreads, allow_spinning);
   VERIFY_IS_EQUAL(tp.NumThreads(), kThreads);
   VERIFY_IS_EQUAL(tp.CurrentThreadId(), -1);
   for (int iter = 0; iter < 100; ++iter) {
@@ -100,8 +101,25 @@ static void test_parallelism()
   }
 }
 
+
+static void test_cancel()
+{
+  NonBlockingThreadPool tp(2);
+
+  // Schedule a large number of closure that each sleeps for one second. This
+  // will keep the thread pool busy for much longer than the default test timeout.
+  for (int i = 0; i < 1000; ++i) {
+    tp.Schedule([]() { EIGEN_SLEEP(2000); });
+  }
+
+  // Cancel the processing of all the closures that are still pending.
+  tp.Cancel();
+}
+
 void test_cxx11_non_blocking_thread_pool()
 {
   CALL_SUBTEST(test_create_destroy_empty_pool());
-  CALL_SUBTEST(test_parallelism());
+  CALL_SUBTEST(test_parallelism(true));
+  CALL_SUBTEST(test_parallelism(false));
+  CALL_SUBTEST(test_cancel());
 }
