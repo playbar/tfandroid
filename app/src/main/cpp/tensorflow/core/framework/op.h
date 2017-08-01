@@ -277,8 +277,7 @@ struct OpDefBuilderReceiver {
   // To call OpRegistry::Global()->Register(...), used by the
   // REGISTER_OP macro below.
   // Note: These are implicitly converting constructors.
-  OpDefBuilderReceiver(
-      const OpDefBuilderWrapper<true>& wrapper);  // NOLINT(runtime/explicit)
+  OpDefBuilderReceiver(const OpDefBuilderWrapper<true>& wrapper);  // NOLINT(runtime/explicit)
   constexpr OpDefBuilderReceiver(const OpDefBuilderWrapper<false>&) {
   }  // NOLINT(runtime/explicit)
 };

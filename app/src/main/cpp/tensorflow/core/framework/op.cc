@@ -18,6 +18,7 @@ limitations under the License.
 #include <algorithm>
 #include <memory>
 #include <vector>
+#include <tensorflow/core/util/event.pb.h>
 #include "tensorflow/core/framework/op_kernel.h"
 #include "tensorflow/core/lib/core/errors.h"
 #include "tensorflow/core/lib/gtl/map_util.h"
@@ -26,6 +27,7 @@ limitations under the License.
 #include "tensorflow/core/platform/mutex.h"
 #include "tensorflow/core/platform/protobuf.h"
 #include "tensorflow/core/platform/types.h"
+#include "tensorflow/c/log.h"
 
 namespace tensorflow {
 
@@ -45,7 +47,8 @@ Status OpRegistryInterface::LookUpOpDef(const string& op_type_name,
 OpRegistry::OpRegistry() : initialized_(false) {}
 
 OpRegistry::~OpRegistry() {
-  for (const auto& e : registry_) delete e.second;
+  for (const auto& e : registry_)
+    delete e.second;
 }
 
 void OpRegistry::Register(const OpRegistrationDataFactory& op_data_factory) {
@@ -161,6 +164,7 @@ string OpRegistry::DebugString(bool include_internal) const {
 bool OpRegistry::MustCallDeferred() const {
   if (initialized_) return false;
   initialized_ = true;
+    LOGE("%s, %d, size:%d", __FUNCTION__, __LINE__, deferred_.size() );
   for (size_t i = 0; i < deferred_.size(); ++i) {
     TF_QCHECK_OK(RegisterAlreadyLocked(deferred_[i]));
   }

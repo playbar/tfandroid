@@ -26,6 +26,7 @@ limitations under the License.
 #include "tensorflow/core/lib/strings/strcat.h"
 #include "tensorflow/core/platform/logging.h"
 #include "tensorflow/core/public/version.h"
+#include "tensorflow/c/log.h"
 
 namespace tensorflow {
 

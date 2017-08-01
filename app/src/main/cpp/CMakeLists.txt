@@ -30,7 +30,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTANDALONE_DEMO_LIB \
                     -std=c++11 -fno-exceptions -frtti -O2 -Wno-narrowing \
                     -fPIE \
                     -DHAVE_PTHREAD \
-                    -DEIGEN_USE_SIMPLE_THREAD_POOL")
+                     ")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
                               -Wl,--allow-multiple-definition \
                               -Wl,--whole-archive -fPIE -v")
@@ -208,6 +208,103 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/tensor_shape.pb_text.cc
             tensorflow/core/framework/remote_fused_graph_execute_info.pb.cc
             tensorflow/core/util/mirror_pad_mode.cc
+            tensorflow/core/ops/function_ops.cc
+            tensorflow/contrib/boosted_trees/ops/split_handler_ops.cc
+            tensorflow/contrib/boosted_trees/ops/model_ops.cc
+            tensorflow/contrib/boosted_trees/ops/training_ops.cc
+            tensorflow/contrib/boosted_trees/ops/ensemble_optimizer_ops.cc
+            tensorflow/contrib/boosted_trees/ops/quantile_ops.cc
+            tensorflow/contrib/boosted_trees/ops/stats_accumulator_ops.cc
+            tensorflow/contrib/resampler/ops/resampler_ops.cc
+            tensorflow/contrib/cudnn_rnn/ops/cudnn_rnn_ops.cc
+            tensorflow/contrib/text/ops/skip_gram_ops.cc
+            tensorflow/contrib/nccl/ops/nccl_ops.cc
+            tensorflow/contrib/input_pipeline/ops/input_pipeline_ops.cc
+            tensorflow/contrib/factorization/ops/factorization_ops.cc
+            tensorflow/contrib/factorization/ops/clustering_ops.cc
+            tensorflow/contrib/memory_stats/ops/memory_stats_ops.cc
+            tensorflow/contrib/batching/ops/batch_ops.cc
+            tensorflow/contrib/image/ops/image_ops.cc
+            tensorflow/contrib/image/ops/single_image_random_dot_stereograms_ops.cc
+            tensorflow/contrib/layers/ops/sparse_feature_cross_op.cc
+            tensorflow/contrib/cloud/ops/bigquery_reader_ops.cc
+            tensorflow/contrib/fused_conv/ops/fused_conv2d_bias_activation_op.cc
+            tensorflow/contrib/rnn/ops/gru_ops.cc
+            tensorflow/contrib/rnn/ops/lstm_ops.cc
+            tensorflow/contrib/seq2seq/ops/beam_search_ops.cc
+            tensorflow/contrib/framework/ops/checkpoint_ops.cc
+            tensorflow/contrib/framework/ops/variable_ops.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/stochastic_hard_routing_function_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/stochastic_hard_routing_gradient_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/unpack_path_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/k_feature_routing_function_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/routing_gradient_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/routing_function_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/hard_routing_function_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/k_feature_gradient_op.cc
+            tensorflow/contrib/tensor_forest/ops/tensor_forest_ops.cc
+            tensorflow/contrib/tensor_forest/ops/stats_ops.cc
+            tensorflow/contrib/tensor_forest/ops/model_ops.cc
+            tensorflow/contrib/ffmpeg/decode_audio_op.cc
+            tensorflow/contrib/tpu/ops/tpu_sendrecv_ops.cc
+            tensorflow/contrib/tpu/ops/replication_ops.cc
+            tensorflow/contrib/tpu/ops/infeed_ops.cc
+            tensorflow/contrib/tpu/ops/cross_replica_ops.cc
+            tensorflow/contrib/tpu/ops/outfeed_ops.cc
+            tensorflow/contrib/tpu/ops/tpu_configuration_ops.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/utils.cc
+            tensorflow/user_ops/duplicate_op.cc
+            tensorflow/user_ops/ackermann_op.cc
+            tensorflow/user_ops/invalid_op.cc
+            tensorflow/examples/adding_an_op/zero_out_op_kernel_3.cc
+            tensorflow/examples/adding_an_op/zero_out_op_kernel_2.cc
+            tensorflow/compiler/jit/ops/xla_ops.cc
+            tensorflow/compiler/jit/ops/parallel_check_op.cc
+            tensorflow/compiler/jit/jit_compilation_pass_registration.cc
+            tensorflow/compiler/tf2xla/ops/functional_ops.cc
+            tensorflow/core/user_ops/fact.cc
+            tensorflow/core/ops/nn_ops.cc
+            tensorflow/core/ops/math_grad.cc
+            tensorflow/core/ops/io_ops.cc
+            tensorflow/core/ops/sendrecv_ops.cc
+            tensorflow/core/ops/logging_ops.cc
+            tensorflow/core/ops/data_flow_ops.cc
+            tensorflow/core/ops/image_ops.cc
+            tensorflow/core/ops/no_op.cc
+            tensorflow/core/ops/debug_ops.cc
+            tensorflow/core/ops/word2vec_ops.cc
+            tensorflow/core/ops/lookup_ops.cc
+            tensorflow/core/ops/stateless_random_ops.cc
+            tensorflow/core/ops/function_ops.cc
+            tensorflow/core/ops/string_ops.cc
+            tensorflow/core/ops/control_flow_ops.cc
+            tensorflow/core/ops/spectral_ops.cc
+            tensorflow/core/ops/set_ops.cc
+            tensorflow/core/ops/bitwise_ops.cc
+            tensorflow/core/ops/ctc_ops.cc
+            tensorflow/core/ops/parsing_ops.cc
+            tensorflow/core/ops/candidate_sampling_ops.cc
+            tensorflow/core/ops/linalg_ops.cc
+            tensorflow/core/ops/array_grad.cc
+            tensorflow/core/ops/training_ops.cc
+            tensorflow/core/ops/script_ops.cc
+            tensorflow/core/ops/dataset_ops.cc
+            tensorflow/core/ops/resource_variable_ops.cc
+            tensorflow/core/ops/audio_ops.cc
+            tensorflow/core/ops/sdca_ops.cc
+            tensorflow/core/ops/random_grad.cc
+            tensorflow/core/ops/sparse_ops.cc
+            tensorflow/core/ops/functional_grad.cc
+            tensorflow/core/ops/state_ops.cc
+            tensorflow/core/ops/functional_ops.cc
+            tensorflow/core/ops/array_ops.cc
+            tensorflow/core/ops/nn_grad.cc
+            tensorflow/core/ops/math_ops.cc
+            tensorflow/core/ops/random_ops.cc
+            tensorflow/core/framework/kernel_def_builder.cc
+            tensorflow/core/ops/remote_fused_graph_ops.cc
+            tensorflow/core/common_runtime/parallel_concat_optimizer.cc
+            tensorflow/contrib/ffmpeg/encode_audio_op.cc
             third_party/protobuf/google/protobuf/message.cc
             third_party/protobuf/google/protobuf/stubs/once.cc
             third_party/protobuf/google/protobuf/generated_message_util.cc

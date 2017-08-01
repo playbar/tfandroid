@@ -28,12 +28,12 @@ class SimpleThreadPoolTempl : public ThreadPoolInterface {
     }
   }
 
-    SimpleThreadPoolTempl(int num_threads, bool low_latency_hint, Environment env = Environment())
-            : env_(env), threads_(num_threads), waiters_(num_threads) {
-      for (int i = 0; i < num_threads; i++) {
-        threads_.push_back(env.CreateThread([this, i]() { WorkerLoop(i); }));
-      }
-    }
+//    SimpleThreadPoolTempl(int num_threads, bool low_latency_hint, Environment env = Environment())
+//            : env_(env), threads_(num_threads), waiters_(num_threads) {
+//      for (int i = 0; i < num_threads; i++) {
+//        threads_.push_back(env.CreateThread([this, i]() { WorkerLoop(i); }));
+//      }
+//    }
 
   // Wait until all scheduled work has finished and then destroy the
   // set of threads.
@@ -114,8 +114,8 @@ class SimpleThreadPoolTempl : public ThreadPoolInterface {
           w.cv.wait(l);
         }
 //          LOGE("file:%s, L:%d", __FILE__, __LINE__);
-          assert(false);
-//        t = w.task;
+//          assert(false);
+        t = w.task;
         w.task.f = nullptr;
       } else {
         // Pick up pending work
