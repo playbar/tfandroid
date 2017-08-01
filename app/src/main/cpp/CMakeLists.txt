@@ -62,15 +62,26 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/allocator_registry.cc
             tensorflow/core/framework/tracking_allocator.cc
             tensorflow/core/graph/graph.cc
+            tensorflow/core/kernels/hexagon/graph_transferer.cc
             tensorflow/core/common_runtime/session.cc
             tensorflow/core/graph/subgraph.cc
             tensorflow/core/common_runtime/session_factory.cc
             tensorflow/core/common_runtime/session_options.cc
             tensorflow/core/common_runtime/shape_refiner.cc
+            tensorflow/core/common_runtime/threadpool_device_factory.cc
+            tensorflow/core/common_runtime/threadpool_device.cc
+            tensorflow/core/common_runtime/device.cc
+            tensorflow/core/common_runtime/local_device.cc
+            tensorflow/core/platform/tracing.cc
+            tensorflow/core/framework/device_base.cc
+            tensorflow/core/framework/resource_mgr.cc
+            tensorflow/core/framework/op_segment.cc
             tensorflow/core/graph/edgeset.cc
             tensorflow/core/graph/graph_constructor.cc
             tensorflow/core/platform/env.cc
-             tensorflow/core/platform/posix/env.cc
+            tensorflow/core/platform/cpu_feature_guard.cc
+            tensorflow/core/platform/cpu_info.cc
+            tensorflow/core/platform/posix/env.cc
             tensorflow/core/platform/posix/load_library.cc
             tensorflow/core/platform/protobuf_util.cc
             tensorflow/core/framework/load_library.cc
@@ -209,6 +220,9 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/remote_fused_graph_execute_info.pb.cc
             tensorflow/core/util/mirror_pad_mode.cc
             tensorflow/core/ops/function_ops.cc
+            tensorflow/core/common_runtime/optimization_registry.cc
+            tensorflow/core/util/strided_slice_op.cc
+            tensorflow/contrib/ffmpeg/default/ffmpeg_lib.cc
             tensorflow/contrib/boosted_trees/ops/split_handler_ops.cc
             tensorflow/contrib/boosted_trees/ops/model_ops.cc
             tensorflow/contrib/boosted_trees/ops/training_ops.cc
@@ -254,13 +268,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/contrib/tpu/ops/tpu_configuration_ops.cc
             tensorflow/contrib/tensor_forest/hybrid/core/ops/utils.cc
             tensorflow/user_ops/duplicate_op.cc
-            tensorflow/user_ops/ackermann_op.cc
-            tensorflow/user_ops/invalid_op.cc
-            tensorflow/examples/adding_an_op/zero_out_op_kernel_3.cc
-            tensorflow/examples/adding_an_op/zero_out_op_kernel_2.cc
-            tensorflow/compiler/jit/ops/xla_ops.cc
-            tensorflow/compiler/jit/ops/parallel_check_op.cc
-            tensorflow/compiler/jit/jit_compilation_pass_registration.cc
             tensorflow/compiler/tf2xla/ops/functional_ops.cc
             tensorflow/core/user_ops/fact.cc
             tensorflow/core/ops/nn_ops.cc
@@ -271,6 +278,7 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/ops/data_flow_ops.cc
             tensorflow/core/ops/image_ops.cc
             tensorflow/core/ops/no_op.cc
+            tensorflow/core/kernels/remote_fused_graph_execute_utils.cc
             tensorflow/core/ops/debug_ops.cc
             tensorflow/core/ops/word2vec_ops.cc
             tensorflow/core/ops/lookup_ops.cc
@@ -282,7 +290,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/ops/set_ops.cc
             tensorflow/core/ops/bitwise_ops.cc
             tensorflow/core/ops/ctc_ops.cc
-            tensorflow/core/ops/parsing_ops.cc
             tensorflow/core/ops/candidate_sampling_ops.cc
             tensorflow/core/ops/linalg_ops.cc
             tensorflow/core/ops/array_grad.cc
@@ -299,7 +306,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/ops/functional_ops.cc
             tensorflow/core/ops/array_ops.cc
             tensorflow/core/ops/nn_grad.cc
-            tensorflow/core/ops/math_ops.cc
             tensorflow/core/ops/random_ops.cc
             tensorflow/core/framework/kernel_def_builder.cc
             tensorflow/core/ops/remote_fused_graph_ops.cc

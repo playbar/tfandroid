@@ -2,4 +2,11 @@ tensorflow/contrib/boosted_trees/ops/prediction_ops.cc
 tensorflow/tools/ci_build/builds/user_ops/zero_out_op_kernel_1.cc
 tensorflow/tools/ci_build/builds/user_ops/cuda_op_kernel.cu.cc
 tensorflow/tools/ci_build/builds/user_ops/cuda_op_kernel.cc
-
+tensorflow/compiler/jit/ops/xla_ops.cc
+tensorflow/compiler/jit/ops/parallel_check_op.cc
+tensorflow/compiler/jit/jit_compilation_pass_registration.cc
+tensorflow/compiler/jit/encapsulate_subgraphs_pass.cc
+tensorflow/core/ops/parsing_ops.cc
+tensorflow/user_ops/ackermann_op.cc
+tensorflow/user_ops/invalid_op.cc
+tensorflow/core/ops/math_ops.cc

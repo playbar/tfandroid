@@ -56,6 +56,10 @@ void OpRegistry::Register(const OpRegistrationDataFactory& op_data_factory) {
   if (initialized_) {
     TF_QCHECK_OK(RegisterAlreadyLocked(op_data_factory));
   } else {
+      if( deferred_.size() == 789 )
+      {
+          int i = 789;
+      }
     deferred_.push_back(op_data_factory);
   }
 }
@@ -166,6 +170,9 @@ bool OpRegistry::MustCallDeferred() const {
   initialized_ = true;
     LOGE("%s, %d, size:%d", __FUNCTION__, __LINE__, deferred_.size() );
   for (size_t i = 0; i < deferred_.size(); ++i) {
+      if( i == 789)
+          i = 789;
+      LOGE("i=%d", i);
     TF_QCHECK_OK(RegisterAlreadyLocked(deferred_[i]));
   }
   deferred_.clear();
@@ -185,15 +192,14 @@ Status OpRegistry::CallDeferred() const {
   return Status::OK();
 }
 
-Status OpRegistry::RegisterAlreadyLocked(
-    const OpRegistrationDataFactory& op_data_factory) const {
+Status OpRegistry::RegisterAlreadyLocked(const OpRegistrationDataFactory& op_data_factory) const
+{
   std::unique_ptr<OpRegistrationData> op_reg_data(new OpRegistrationData);
   Status s = op_data_factory(op_reg_data.get());
   if (s.ok()) {
     s = ValidateOpDef(op_reg_data->op_def);
-    if (s.ok() &&
-        !gtl::InsertIfNotPresent(&registry_, op_reg_data->op_def.name(),
-                                 op_reg_data.get())) {
+    if (s.ok() && !gtl::InsertIfNotPresent(&registry_, op_reg_data->op_def.name(), op_reg_data.get()))
+    {
       s = errors::AlreadyExists("Op with name ", op_reg_data->op_def.name());
     }
   }

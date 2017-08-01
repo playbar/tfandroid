@@ -42,8 +42,7 @@ struct FactoryItem {
 };
 
 std::unordered_map<string, FactoryItem>& device_factories() {
-  static std::unordered_map<string, FactoryItem>* factories =
-      new std::unordered_map<string, FactoryItem>;
+  static std::unordered_map<string, FactoryItem>* factories = new std::unordered_map<string, FactoryItem>;
   return *factories;
 }
 
