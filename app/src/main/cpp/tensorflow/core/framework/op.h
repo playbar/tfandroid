@@ -46,8 +46,7 @@ class OpRegistryInterface {
   // Returns an error status and sets *op_reg_data to nullptr if no OpDef is
   // registered under that name, otherwise returns the registered OpDef.
   // Caller must not delete the returned pointer.
-  virtual Status LookUp(const string& op_type_name,
-                        const OpRegistrationData** op_reg_data) const = 0;
+  virtual Status LookUp(const string& op_type_name, const OpRegistrationData** op_reg_data) const = 0;
 
   // Shorthand for calling LookUp to get the OpDef.
   Status LookUpOpDef(const string& op_type_name, const OpDef** op_def) const;

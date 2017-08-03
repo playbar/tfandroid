@@ -546,6 +546,7 @@ class ColocationGraph {
         for (Device* d : device_set_->devices()) {
           registered_device_types.insert(d->device_type());
         }
+          string str =  str_util::Join(registered_device_types, ",");
         return errors::InvalidArgument(
             "No OpKernel was registered to support Op '", node.type_string(),
             "' with these attrs.  Registered devices: [",
@@ -658,7 +659,10 @@ Status SimplePlacer::Run() {
       graph_, devices_,
       options_ == nullptr || options_->config.allow_soft_placement());
 
-  TF_RETURN_IF_ERROR(colocation_graph.InitializeMembers());
+//  TF_RETURN_IF_ERROR(colocation_graph.InitializeMembers());
+  const ::tensorflow::Status _status = (colocation_graph.InitializeMembers());
+  if (!_status.ok())
+    return _status;
 
   // 1. First add all of the nodes. Note that steps (1) and (2)
   // requires two passes over the nodes because the graph (and hence

@@ -355,8 +355,7 @@ class FunctionLibraryDefinition : public OpRegistryInterface {
   };
 
   const OpRegistryInterface* const default_registry_;
-  gtl::FlatMap<string, std::unique_ptr<FunctionDefAndOpRegistration>>
-      function_defs_;
+  gtl::FlatMap<string, std::unique_ptr<FunctionDefAndOpRegistration>> function_defs_;
   gtl::FlatMap<string, string> func_grad_;
 
   // Helper function for GetAttr. Returns the FunctionDef* to get the

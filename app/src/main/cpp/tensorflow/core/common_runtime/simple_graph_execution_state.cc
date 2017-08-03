@@ -277,7 +277,10 @@ Status SimpleGraphExecutionState::InitBaseGraph(
 
   SimplePlacer placer(new_graph.get(), device_set_, session_options_);
   // TODO(mrry): Consider making the SimplePlacer cancelable.
-  TF_RETURN_IF_ERROR(placer.Run());
+//  TF_RETURN_IF_ERROR(placer.Run());
+  const ::tensorflow::Status _status = (placer.Run());
+  if (!_status.ok())
+    return _status;
 
   TF_RETURN_IF_ERROR(OptimizationPassRegistry::Global()->RunGrouping(
       OptimizationPassRegistry::POST_PLACEMENT, optimization_options));

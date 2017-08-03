@@ -46,6 +46,7 @@ add_library(tensorflow_inference SHARED
             tensorflow/java/src/main/native/session_jni.cc
             tensorflow/java/src/main/native/tensor_jni.cc
             tensorflow/java/src/main/native/tensorflow_jni.cc
+            tensorflow/contrib/android/jni/run_stats_jni.cc
             tensorflow/core/platform/default/logging.cc
             tensorflow/core/framework/tensor_shape.cc
             tensorflow/core/framework/tensor.cc
@@ -166,9 +167,20 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/graph_transfer_info.pb.cc
             tensorflow/core/protobuf/rewriter_config.pb.cc
             tensorflow/core/framework/node_def.pb_text.cc
+            tensorflow/core/util/env_var.cc
+            tensorflow/core/common_runtime/device_set.cc
+            tensorflow/core/common_runtime/device_mgr.cc
+            tensorflow/core/common_runtime/simple_graph_execution_state.cc
+            tensorflow/core/common_runtime/debugger_state_interface.cc
+            tensorflow/core/common_runtime/rendezvous_mgr.cc
+            tensorflow/core/kernels/session_ops.cc
+            tensorflow/core/common_runtime/session_state.cc
+            tensorflow/core/common_runtime/graph_optimizer.cc
             tensorflow/core/common_runtime/device_factory.cc
+            tensorflow/core/common_runtime/direct_session.cc
             tensorflow/core/util/tensor_slice_reader.cc
             tensorflow/core/util/saved_tensor_slice.pb.cc
+            tensorflow/core/util/stat_summarizer.cc
             tensorflow/core/framework/cost_graph.pb_text.cc
             tensorflow/core/lib/core/error_codes.pb.cc
             tensorflow/core/framework/kernel_def.pb_text.cc
@@ -220,6 +232,18 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/remote_fused_graph_execute_info.pb.cc
             tensorflow/core/util/mirror_pad_mode.cc
             tensorflow/core/ops/function_ops.cc
+            tensorflow/core/common_runtime/copy_tensor.cc
+            tensorflow/core/graph/gradients.cc
+            tensorflow/core/graph/graph_def_builder.cc
+            tensorflow/core/graph/control_flow.cc
+            tensorflow/core/framework/graph_def_util.cc
+            tensorflow/core/common_runtime/simple_placer.cc
+            tensorflow/core/graph/validate.cc
+            tensorflow/core/common_runtime/function.cc
+            tensorflow/core/common_runtime/constant_folding.cc
+            tensorflow/core/graph/optimizer_cse.cc
+            tensorflow/core/common_runtime/memory_types.cc
+            tensorflow/core/graph/graph_partition.cc
             tensorflow/core/common_runtime/optimization_registry.cc
             tensorflow/core/util/strided_slice_op.cc
             tensorflow/contrib/ffmpeg/default/ffmpeg_lib.cc
@@ -267,7 +291,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/contrib/tpu/ops/outfeed_ops.cc
             tensorflow/contrib/tpu/ops/tpu_configuration_ops.cc
             tensorflow/contrib/tensor_forest/hybrid/core/ops/utils.cc
-            tensorflow/user_ops/duplicate_op.cc
             tensorflow/compiler/tf2xla/ops/functional_ops.cc
             tensorflow/core/user_ops/fact.cc
             tensorflow/core/ops/nn_ops.cc
@@ -278,6 +301,7 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/ops/data_flow_ops.cc
             tensorflow/core/ops/image_ops.cc
             tensorflow/core/ops/no_op.cc
+            tensorflow/core/ops/math_ops.cc
             tensorflow/core/kernels/remote_fused_graph_execute_utils.cc
             tensorflow/core/ops/debug_ops.cc
             tensorflow/core/ops/word2vec_ops.cc

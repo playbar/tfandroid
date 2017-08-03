@@ -901,11 +901,13 @@ const FunctionDef* FunctionLibraryDefinition::Find(const string& name) const {
   }
 }
 
-Status FunctionLibraryDefinition::AddFunctionDef(const FunctionDef& fdef) {
-  std::unique_ptr<FunctionDefAndOpRegistration>* entry =
-      &function_defs_[fdef.signature().name()];
-  if (*entry != nullptr) {
-    if (!FunctionDefsEqual((*entry)->fdef, fdef)) {
+Status FunctionLibraryDefinition::AddFunctionDef(const FunctionDef& fdef)
+{
+  std::unique_ptr<FunctionDefAndOpRegistration>* entry = &function_defs_[fdef.signature().name()];
+  if (*entry != nullptr)
+  {
+    if (!FunctionDefsEqual((*entry)->fdef, fdef))
+    {
       return errors::InvalidArgument(
           "Cannot add function '", fdef.signature().name(),
           "' because a different function with the same name already "

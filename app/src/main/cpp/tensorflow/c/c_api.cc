@@ -1689,9 +1689,9 @@ static void GraphImportGraphDefLocked(TF_Graph* graph, const GraphDef& def,
   }
   const int last_node_id = graph->graph.num_node_ids();
   std::vector<std::pair<Node*, int>> return_outputs_vec;
-  status->status = tensorflow::ImportGraphDef(
-      opts->opts, def, &graph->graph, &graph->refiner, &return_outputs_vec);
-  if (!status->status.ok()) return;
+  status->status = tensorflow::ImportGraphDef(opts->opts, def, &graph->graph, &graph->refiner, &return_outputs_vec);
+  if (!status->status.ok())
+    return;
   for (int i = last_node_id; i < graph->graph.num_node_ids(); ++i) {
     auto* node = graph->graph.FindNodeId(i);
     if (node != nullptr) graph->name_map[node->name()] = node;

@@ -170,8 +170,8 @@ bool OpRegistry::MustCallDeferred() const {
   initialized_ = true;
     LOGE("%s, %d, size:%d", __FUNCTION__, __LINE__, deferred_.size() );
   for (size_t i = 0; i < deferred_.size(); ++i) {
-      if( i == 789)
-          i = 789;
+      if( i == 442)
+          i = 442;
       LOGE("i=%d", i);
     TF_QCHECK_OK(RegisterAlreadyLocked(deferred_[i]));
   }

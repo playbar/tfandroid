@@ -115,7 +115,8 @@ class GraphConstructor {
     GraphConstructor c(opts, node_defs, versions, library, g, refiner,
                        return_tensors);
     const Status s = c.TryImport();
-    if (!s.ok()) c.Undo();
+    if (!s.ok())
+      c.Undo();
     return s;
   }
 
@@ -536,13 +537,29 @@ Status GraphConstructor::ValidateShape(Node* node) {
   return Status::OK();
 }
 
-Status GraphConstructor::ModifyNodeDefForImport(NodeDef* node_def) {
+Status GraphConstructor::ModifyNodeDefForImport(NodeDef* node_def)
+{
+    static int count = 0;
+    ++count;
   const OpDef* op_def;
-  TF_RETURN_IF_ERROR(g_->op_registry()->LookUpOpDef(node_def->op(), &op_def));
+//  TF_RETURN_IF_ERROR(g_->op_registry()->LookUpOpDef(node_def->op(), &op_def));
+    if( count == 223 )
+        count = 223;
+    const ::tensorflow::Status _status = (g_->op_registry()->LookUpOpDef(node_def->op(), &op_def));
+    if (!_status.ok())
+        return _status;
   AddDefaultsToNodeDef(*op_def, node_def);
-  TF_RETURN_IF_ERROR(ValidateNodeDef(*node_def, *op_def));
+//  TF_RETURN_IF_ERROR(ValidateNodeDef(*node_def, *op_def));
+    {
+        const ::tensorflow::Status _status = (ValidateNodeDef(*node_def, *op_def));
+        if (!_status.ok())
+            return _status;
+    }
   if (versions_) {
-    TF_RETURN_IF_ERROR(CheckOpDeprecation(*op_def, versions_->producer()));
+//    TF_RETURN_IF_ERROR(CheckOpDeprecation(*op_def, versions_->producer()));
+      const ::tensorflow::Status _status = (CheckOpDeprecation(*op_def, versions_->producer()));
+      if (!_status.ok())
+          return _status;
   }
   return Status::OK();
 }
@@ -672,7 +689,10 @@ Status GraphConstructor::Convert() {
   // Import functions before adding nodes, since imported nodes may refer to
   // functions
   if (library_) {
-    TF_RETURN_IF_ERROR(g_->AddFunctionLibrary(*library_));
+//    TF_RETURN_IF_ERROR(g_->AddFunctionLibrary(*library_));
+      const ::tensorflow::Status _status = (g_->AddFunctionLibrary(*library_));
+      if (!_status.ok())
+          return _status;
   }
 
   std::vector<InputInfo> inputs;
@@ -722,7 +742,10 @@ Status GraphConstructor::Convert() {
     }
 
     DCHECK_EQ(node_def->input_size(), input_already_exists.size());
-    TF_RETURN_IF_ERROR(ValidateColocationConstraints(*node_def));
+//    TF_RETURN_IF_ERROR(ValidateColocationConstraints(*node_def));
+      const ::tensorflow::Status _status = ValidateColocationConstraints(*node_def);
+      if (!_status.ok())
+          return _status;
     for (int i = 0; i < node_def->input_size(); ++i) {
       TensorId id(ParseTensorName(node_def->input(i)));
       Node* src_node;
@@ -762,9 +785,17 @@ Status GraphConstructor::Convert() {
     Node* node;
     if (opts_.importing) {
       AddPrefixToNodeDef(input_already_exists, &imported_node_def);
-      TF_RETURN_IF_ERROR(ModifyNodeDefForImport(&imported_node_def));
+//      TF_RETURN_IF_ERROR(ModifyNodeDefForImport(&imported_node_def));
+        const ::tensorflow::Status _status = (ModifyNodeDefForImport(&imported_node_def));
+        if (!_status.ok())
+            return _status;
     }
-    TF_RETURN_IF_ERROR(MakeNode(*node_def, &node));
+//    TF_RETURN_IF_ERROR(MakeNode(*node_def, &node));
+      {
+          const ::tensorflow::Status _status = (MakeNode(*node_def, &node));
+          if (!_status.ok())
+              return _status;
+      }
     // Use original_node_def so name StringPiece remains valid
     gdef_nodes_[original_node_def.name()].node = node;
 
@@ -778,14 +809,20 @@ Status GraphConstructor::Convert() {
       } else if (inputs[i].index == Graph::kControlSlot) {
         g_->AddControlEdge(inputs[i].node, node);
       } else {
-        TF_RETURN_IF_ERROR(MakeEdge(inputs[i].node, inputs[i].index, node, i));
+//        TF_RETURN_IF_ERROR(MakeEdge(inputs[i].node, inputs[i].index, node, i));
+          const ::tensorflow::Status _status = (MakeEdge(inputs[i].node, inputs[i].index, node, i));
+          if (!_status.ok())
+              return _status;
       }
     }
 
     // TODO(skyewm): remove conditional when b/35715995 ("Functions lack shape
     // inference") is resolved.
     if (g_->flib_def().Find(node_def->name()) == nullptr) {
-      TF_RETURN_IF_ERROR(ValidateShape(node));
+//      TF_RETURN_IF_ERROR(ValidateShape(node));
+        const ::tensorflow::Status _status = (ValidateShape(node));
+        if (!_status.ok())
+            return _status;
     }
 
     // Update pending_count_ for outputs.
