@@ -156,9 +156,7 @@ public class TensorFlowImageClassifier implements Classifier {
     Trace.endSection();
 
     // Find the best classifications.
-    PriorityQueue<Recognition> pq =
-        new PriorityQueue<Recognition>(
-            3,
+    PriorityQueue<Recognition> pq = new PriorityQueue<Recognition>(3,
             new Comparator<Recognition>() {
               @Override
               public int compare(Recognition lhs, Recognition rhs) {
@@ -166,16 +164,16 @@ public class TensorFlowImageClassifier implements Classifier {
                 return Float.compare(rhs.getConfidence(), lhs.getConfidence());
               }
             });
-    for (int i = 0; i < outputs.length; ++i) {
+    for (int i = 0; i < outputs.length; ++i)
+    {
       if (outputs[i] > THRESHOLD) {
-        pq.add(
-            new Recognition(
-                "" + i, labels.size() > i ? labels.get(i) : "unknown", outputs[i], null));
+        pq.add(new Recognition("" + i, labels.size() > i ? labels.get(i) : "unknown", outputs[i], null));
       }
     }
     final ArrayList<Recognition> recognitions = new ArrayList<Recognition>();
     int recognitionsSize = Math.min(pq.size(), MAX_RESULTS);
-    for (int i = 0; i < recognitionsSize; ++i) {
+    for (int i = 0; i < recognitionsSize; ++i)
+    {
       recognitions.add(pq.poll());
     }
     Trace.endSection(); // "recognizeImage"

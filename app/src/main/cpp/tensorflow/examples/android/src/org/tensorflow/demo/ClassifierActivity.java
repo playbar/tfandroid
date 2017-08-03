@@ -63,8 +63,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
 
   private static final String MODEL_FILE = "file:///android_asset/tensorflow_inception_graph.pb";
-  private static final String LABEL_FILE =
-      "file:///android_asset/imagenet_comp_graph_label_strings.txt";
+  private static final String LABEL_FILE = "file:///android_asset/imagenet_comp_graph_label_strings.txt";
 
 
   private static final boolean MAINTAIN_ASPECT = true;
@@ -100,8 +99,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
     borderedText = new BorderedText(textSizePx);
     borderedText.setTypeface(Typeface.MONOSPACE);
 
-    classifier =
-        TensorFlowImageClassifier.create(
+    classifier = TensorFlowImageClassifier.create(
             getAssets(),
             MODEL_FILE,
             LABEL_FILE,

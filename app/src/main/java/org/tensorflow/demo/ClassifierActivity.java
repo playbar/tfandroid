@@ -25,6 +25,7 @@ import android.graphics.Typeface;
 
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
+import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.Display;
@@ -63,14 +64,11 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
 
   private static final String MODEL_FILE = "file:///android_asset/tensorflow_inception_graph.pb";
-  private static final String LABEL_FILE =
-      "file:///android_asset/imagenet_comp_graph_label_strings.txt";
-
+  private static final String LABEL_FILE = "file:///android_asset/imagenet_comp_graph_label_strings.txt";
 
   private static final boolean MAINTAIN_ASPECT = true;
 
   private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
-
 
   private Integer sensorOrientation;
   private Classifier classifier;
@@ -94,14 +92,20 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   private static final float TEXT_SIZE_DIP = 10;
 
   @Override
-  public void onPreviewSizeChosen(final Size size, final int rotation) {
-    final float textSizePx = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
-    borderedText = new BorderedText(textSizePx);
+  public void onPreviewSizeChosen(final Size size, final int rotation)
+  {
+    final float textSizePx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
+    borderedText = new BorderedText(10);
     borderedText.setTypeface(Typeface.MONOSPACE);
 
-    classifier =
-        TensorFlowImageClassifier.create(
+//    float result = 1.04f;
+//    for( int i = 0; i < 60; ++i )
+//    {
+//      result *= 1.04f;
+//    }
+//    Log.e("result", "" + result);
+
+    classifier = TensorFlowImageClassifier.create(
             getAssets(),
             MODEL_FILE,
             LABEL_FILE,
@@ -135,8 +139,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
     yuvBytes = new byte[3][];
 
-    addCallback(
-        new DrawCallback() {
+    addCallback(new DrawCallback() {
           @Override
           public void drawCallback(final Canvas canvas) {
             renderDebug(canvas);
@@ -189,9 +192,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
       final Matrix matrix = new Matrix();
       final float scaleFactor = 2;
       matrix.postScale(scaleFactor, scaleFactor);
-      matrix.postTranslate(
-          canvas.getWidth() - copy.getWidth() * scaleFactor,
-          canvas.getHeight() - copy.getHeight() * scaleFactor);
+      matrix.postTranslate(canvas.getWidth() - copy.getWidth() * scaleFactor, canvas.getHeight() - copy.getHeight() * scaleFactor);
       canvas.drawBitmap(copy, matrix, new Paint());
 
       final Vector<String> lines = new Vector<String>();

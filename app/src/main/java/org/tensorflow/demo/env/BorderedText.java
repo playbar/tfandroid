@@ -22,6 +22,8 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.util.Log;
+
 import java.util.Vector;
 
 /**
@@ -83,6 +85,7 @@ public class BorderedText {
   public void drawLines(Canvas canvas, final float posX, final float posY, Vector<String> lines) {
     int lineNum = 0;
     for (final String line : lines) {
+      Log.e("BorderText", line);
       drawText(canvas, posX, posY - getTextSize() * (lines.size() - lineNum - 1), line);
       ++lineNum;
     }
