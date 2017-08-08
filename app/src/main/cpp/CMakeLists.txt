@@ -38,6 +38,200 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
 MESSAGE(STATUS "Project: tensorflow_inference")
 
 add_library(tensorflow_inference SHARED
+            tensorflow/tools/ci_build/builds/user_ops/zero_out_op_kernel_1.cc
+            tensorflow/contrib/boosted_trees/kernels/stats_accumulator_ops.cc
+            tensorflow/contrib/input_pipeline/kernels/input_pipeline_kernels.cc
+            tensorflow/contrib/factorization/kernels/clustering_ops.cc
+            tensorflow/contrib/factorization/kernels/masked_matmul_ops.cc
+            tensorflow/contrib/factorization/kernels/wals_solver_ops.cc
+            tensorflow/contrib/memory_stats/kernels/memory_stats_ops.cc
+            tensorflow/contrib/batching/kernels/batch_kernels.cc
+            tensorflow/contrib/image/kernels/bipartite_match_op.cc
+            tensorflow/contrib/framework/kernels/load_and_remap_matrix_op.cc
+            tensorflow/contrib/framework/kernels/generate_vocab_remapping_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/unpack_path_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/k_feature_routing_function_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/routing_gradient_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/routing_function_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/hard_routing_function_op.cc
+            tensorflow/contrib/tensor_forest/hybrid/core/ops/k_feature_gradient_op.cc
+            tensorflow/contrib/tensor_forest/kernels/reinterpret_string_to_float_op.cc
+            tensorflow/contrib/tensor_forest/kernels/scatter_add_ndim_op.cc
+            tensorflow/contrib/ffmpeg/encode_audio_op.cc
+            tensorflow/contrib/ffmpeg/decode_audio_op.cc
+            tensorflow/user_ops/ackermann_op.cc
+            tensorflow/compiler/jit/kernels/parallel_check_op.cc
+            tensorflow/core/user_ops/fact.cc
+            tensorflow/core/graph/testlib.cc
+            tensorflow/core/kernels/barrier_ops.cc
+            tensorflow/core/kernels/fixed_length_record_reader_op.cc
+            tensorflow/core/kernels/cache_dataset_ops.cc
+            tensorflow/core/kernels/sendrecv_ops.cc
+            tensorflow/core/kernels/candidate_sampler_ops.cc
+            tensorflow/core/kernels/logging_ops.cc
+            tensorflow/core/kernels/whole_file_read_ops.cc
+            tensorflow/core/kernels/decode_csv_op.cc
+            tensorflow/core/kernels/skip_dataset_op.cc
+            tensorflow/core/kernels/concatenate_dataset_op.cc
+            tensorflow/core/kernels/no_op.cc
+            tensorflow/core/kernels/fused_batch_norm_op.cc
+            tensorflow/core/kernels/encode_wav_op.cc
+            tensorflow/core/kernels/mfcc_op.cc
+            tensorflow/core/kernels/adjust_saturation_op.cc
+            tensorflow/core/kernels/cast_op.cc
+            tensorflow/core/kernels/conditional_accumulator_base_op.cc
+            tensorflow/core/kernels/filter_dataset_op.cc
+            tensorflow/core/kernels/restore_op.cc
+            tensorflow/core/kernels/identity_reader_op.cc
+            tensorflow/core/kernels/ctc_loss_op.cc
+            tensorflow/core/kernels/function_ops.cc
+            tensorflow/core/kernels/string_split_op.cc
+            tensorflow/core/kernels/cwise_op_logical_or.cc
+            tensorflow/core/kernels/concat_op.cc
+            tensorflow/core/kernels/control_flow_ops.cc
+            tensorflow/core/kernels/attention_ops.cc
+            tensorflow/core/kernels/interleave_dataset_op.cc
+            tensorflow/core/kernels/variable_ops.cc
+            tensorflow/core/kernels/reader_dataset_ops.cc
+            tensorflow/core/kernels/parse_tensor_op.cc
+            tensorflow/core/kernels/save_op.cc
+            tensorflow/core/kernels/fake_quant_ops.cc
+            tensorflow/core/kernels/cwise_op_logical_not.cc
+            tensorflow/core/kernels/decode_wav_op.cc
+            tensorflow/core/kernels/tensor_array_ops.cc
+            tensorflow/core/kernels/save_restore_v2_ops.cc
+            tensorflow/core/kernels/iterator_ops.cc
+            tensorflow/core/kernels/range_dataset_op.cc
+            tensorflow/core/kernels/word2vec_kernels.cc
+            tensorflow/core/kernels/string_join_op.cc
+            tensorflow/core/kernels/fifo_queue_op.cc
+            tensorflow/core/kernels/shape_ops.cc
+            tensorflow/core/kernels/ignore_errors_dataset_op.cc
+            tensorflow/core/kernels/serialize_sparse_op.cc
+            tensorflow/core/kernels/matching_files_op.cc
+            tensorflow/core/kernels/decode_bmp_op.cc
+            tensorflow/core/kernels/shuffle_dataset_op.cc
+            tensorflow/core/kernels/batch_dataset_op.cc
+            tensorflow/core/kernels/text_line_reader_op.cc
+            tensorflow/core/kernels/constant_op.cc
+            tensorflow/core/kernels/summary_audio_op.cc
+            tensorflow/core/kernels/zip_dataset_op.cc
+            tensorflow/core/kernels/spectrogram_op.cc
+            tensorflow/core/kernels/record_input_op.cc
+            tensorflow/core/kernels/sparse_tensors_map_ops.cc
+            tensorflow/core/kernels/stack_ops.cc
+            tensorflow/core/kernels/priority_queue_op.cc
+            tensorflow/core/kernels/colorspace_op.cc
+            tensorflow/core/kernels/flat_map_dataset_op.cc
+            tensorflow/core/kernels/tensor_slice_dataset_op.cc
+            tensorflow/core/kernels/stage_op.cc
+            tensorflow/core/kernels/as_string_op.cc
+            tensorflow/core/kernels/where_op.cc
+            tensorflow/core/kernels/lookup_table_init_op.cc
+            tensorflow/core/kernels/tf_record_reader_op.cc
+            tensorflow/core/kernels/sparse_reshape_op.cc
+            tensorflow/core/kernels/cwise_op_logical_and.cc
+            tensorflow/core/kernels/base64_ops.cc
+            tensorflow/core/kernels/tensor_dataset_op.cc
+            tensorflow/core/kernels/parallel_map_dataset_op.cc
+            tensorflow/core/kernels/resource_variable_ops.cc
+            tensorflow/core/kernels/identity_op.cc
+            tensorflow/core/kernels/immutable_constant_op.cc
+            tensorflow/core/kernels/group_by_window_dataset_op.cc
+            tensorflow/core/kernels/padded_batch_dataset_op.cc
+            tensorflow/core/kernels/session_ops.cc
+            tensorflow/core/kernels/reader_ops.cc
+            tensorflow/core/kernels/remote_fused_graph_execute_op.cc
+            tensorflow/core/kernels/lookup_table_op.cc
+            tensorflow/core/kernels/fft_ops.cc
+            tensorflow/core/kernels/random_shuffle_queue_op.cc
+            tensorflow/core/kernels/map_stage_op.cc
+            tensorflow/core/kernels/take_dataset_op.cc
+            tensorflow/core/kernels/queue_ops.cc
+            tensorflow/core/kernels/padding_fifo_queue_op.cc
+            tensorflow/core/kernels/map_dataset_op.cc
+            tensorflow/core/kernels/repeat_dataset_op.cc
+            tensorflow/core/kernels/summary_op.cc
+            tensorflow/core/kernels/adjust_hue_op.cc
+            tensorflow/core/kernels/bitcast_op.cc
+            tensorflow/core/kernels/ctc_decoder_ops.cc
+            tensorflow/core/kernels/reduce_join_op.cc
+            tensorflow/core/kernels/conditional_accumulator_op.cc
+            tensorflow/core/kernels/non_max_suppression_op.cc
+            tensorflow/core/kernels/dense_to_sparse_batch_dataset_op.cc
+            tensorflow/core/distributed_runtime/rpc/grpc_testlib_ops.cc
+            tensorflow/core/framework/resource_mgr.cc
+            tensorflow/core/framework/op_kernel.cc
+            tensorflow/contrib/boosted_trees/lib/utils/parallel_for.cc
+            tensorflow/contrib/batching/util/periodic_function.cc
+            tensorflow/core/kernels/concat_lib_cpu.cc
+            tensorflow/core/kernels/split_lib_cpu.cc
+            tensorflow/core/util/tensor_bundle/tensor_bundle.cc
+            tensorflow/core/lib/random/simple_philox.cc
+            tensorflow/core/kernels/initializable_lookup_table.cc
+            tensorflow/core/framework/lookup_interface.cc
+            tensorflow/core/util/work_sharder.cc
+            tensorflow/core/kernels/queue_base.cc
+            tensorflow/compiler/jit/legacy_flags/parallel_check_op_flags.cc
+            tensorflow/core/kernels/priority_queue.cc
+            tensorflow/core/lib/io/buffered_inputstream.cc
+            tensorflow/core/framework/reader_base.cc
+            tensorflow/core/lib/io/random_inputstream.cc
+            tensorflow/core/lib/io/zlib_inputstream.cc
+            tensorflow/core/util/guarded_philox_random.cc
+            tensorflow/core/util/guarded_philox_random.cc
+            tensorflow/core/kernels/range_sampler.cc
+            tensorflow/core/kernels/captured_function.cc
+            tensorflow/core/kernels/dataset.cc
+            tensorflow/core/kernels/mfcc.cc
+            tensorflow/core/kernels/cast_op_impl_uint8.cc
+            tensorflow/core/kernels/cast_op_impl_int8.cc
+            tensorflow/core/kernels/cast_op_impl_uint16.cc
+            tensorflow/core/kernels/cast_op_impl_int32.cc
+            tensorflow/core/kernels/cast_op_impl_int64.cc
+            tensorflow/core/kernels/cast_op_impl_half.cc
+            tensorflow/core/kernels/cast_op_impl_float.cc
+            tensorflow/core/kernels/cast_op_impl_double.cc
+            tensorflow/core/kernels/cast_op_impl_complex64.cc
+            tensorflow/core/kernels/cast_op_impl_complex128.cc
+            tensorflow/core/kernels/conditional_accumulator_base.cc
+            tensorflow/core/kernels/save_restore_tensor.cc
+            tensorflow/core/util/sparse/group_iterator.cc
+            tensorflow/core/kernels/encode_wav_op.cc
+            tensorflow/core/lib/wav/wav_io.cc
+            tensorflow/core/kernels/cast_op_impl_bool.cc
+            tensorflow/core/kernels/cast_op_impl_int16.cc
+            tensorflow/core/kernels/cast_op_impl_bfloat.cc
+            tensorflow/core/util/ctc/ctc_loss_calculator.cc
+            tensorflow/core/lib/io/inputbuffer.cc
+            tensorflow/core/lib/io/record_reader.cc
+            tensorflow/core/util/tensor_slice_writer.cc
+            tensorflow/core/kernels/tensor_array.cc
+            tensorflow/core/kernels/spectrogram.cc
+            tensorflow/core/kernels/fill_functor.cc
+            tensorflow/core/util/tensor_bundle/naming.cc
+            tensorflow/core/kernels/ops_util.cc
+            tensorflow/core/lib/random/distribution_sampler.cc
+            tensorflow/core/kernels/fifo_queue.cc
+            tensorflow/core/kernels/record_yielder.cc
+            tensorflow/core/kernels/lookup_util.cc
+            tensorflow/core/kernels/cwise_ops_common.cc
+            tensorflow/core/util/util.cc
+            tensorflow/core/kernels/window_dataset.cc
+            tensorflow/core/kernels/mfcc_dct.cc
+            tensorflow/core/kernels/mfcc_mel_filterbank.cc
+            tensorflow/core/lib/random/weighted_picker.cc
+            tensorflow/core/util/command_line_flags.cc
+            tensorflow/core/lib/io/table_builder.cc
+            tensorflow/core/lib/strings/base64.cc
+            tensorflow/core/kernels/padding_fifo_queue.cc
+            tensorflow/core/framework/bfloat16.cc
+            tensorflow/core/util/bcast.cc
+            tensorflow/core/lib/histogram/histogram.cc
+            tensorflow/compiler/xla/legacy_flags/parse_flags_from_env.cc
+            tensorflow/core/lib/io/inputstream_interface.cc
+            tensorflow/core/lib/io/block_builder.cc
+            tensorflow/core/lib/io/compression.cc
             tensorflow/java/src/main/native/exception_jni.cc
             tensorflow/java/src/main/native/graph_jni.cc
             tensorflow/java/src/main/native/operation_builder_jni.cc
@@ -75,7 +269,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/common_runtime/local_device.cc
             tensorflow/core/platform/tracing.cc
             tensorflow/core/framework/device_base.cc
-            tensorflow/core/framework/resource_mgr.cc
             tensorflow/core/framework/op_segment.cc
             tensorflow/core/graph/edgeset.cc
             tensorflow/core/graph/graph_constructor.cc
@@ -99,7 +292,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/node_def_util.cc
             tensorflow/core/framework/attr_value_util.cc
             tensorflow/core/framework/op_def_util.cc
-            tensorflow/core/framework/op_def_util.cc
             tensorflow/core/framework/node_def_builder.cc
             tensorflow/core/framework/shape_inference.cc
             tensorflow/core/framework/variant.cc
@@ -112,13 +304,11 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/platform/posix/env_time.cc
             tensorflow/core/platform/file_system.cc
             tensorflow/core/platform/posix/posix_file_system.cc
-            tensorflow/core/framework/op_kernel.cc
             tensorflow/core/framework/op_def_builder.cc
             tensorflow/core/lib/strings/proto_text_util.cc
             tensorflow/core/framework/rendezvous.cc
             tensorflow/core/common_runtime/executor.cc
             tensorflow/core/framework/tensor_util.cc
-            tensorflow/core/common_runtime/executor.cc
             tensorflow/core/lib/strings/strcat.cc
             tensorflow/core/lib/strings/stringprintf.cc
             tensorflow/core/framework/attr_value.pb.cc
@@ -155,7 +345,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/protobuf/debug.pb_text.cc
             tensorflow/core/protobuf/rewriter_config.pb_text.cc
             tensorflow/core/protobuf/cluster.pb_text.cc
-            tensorflow/core/util/memmapped_file_system.pb_text.cc
             tensorflow/core/platform/posix/port.cc
             tensorflow/core/lib/strings/numbers.cc
             tensorflow/core/lib/random/random.cc
@@ -173,7 +362,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/common_runtime/simple_graph_execution_state.cc
             tensorflow/core/common_runtime/debugger_state_interface.cc
             tensorflow/core/common_runtime/rendezvous_mgr.cc
-            tensorflow/core/kernels/session_ops.cc
             tensorflow/core/common_runtime/session_state.cc
             tensorflow/core/common_runtime/graph_optimizer.cc
             tensorflow/core/common_runtime/device_factory.cc
@@ -249,7 +437,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/contrib/ffmpeg/default/ffmpeg_lib.cc
             tensorflow/contrib/boosted_trees/ops/split_handler_ops.cc
             tensorflow/contrib/boosted_trees/ops/model_ops.cc
-            tensorflow/contrib/boosted_trees/ops/training_ops.cc
             tensorflow/contrib/boosted_trees/ops/ensemble_optimizer_ops.cc
             tensorflow/contrib/boosted_trees/ops/quantile_ops.cc
             tensorflow/contrib/boosted_trees/ops/stats_accumulator_ops.cc
@@ -274,16 +461,9 @@ add_library(tensorflow_inference SHARED
             tensorflow/contrib/framework/ops/variable_ops.cc
             tensorflow/contrib/tensor_forest/hybrid/core/ops/stochastic_hard_routing_function_op.cc
             tensorflow/contrib/tensor_forest/hybrid/core/ops/stochastic_hard_routing_gradient_op.cc
-            tensorflow/contrib/tensor_forest/hybrid/core/ops/unpack_path_op.cc
-            tensorflow/contrib/tensor_forest/hybrid/core/ops/k_feature_routing_function_op.cc
-            tensorflow/contrib/tensor_forest/hybrid/core/ops/routing_gradient_op.cc
-            tensorflow/contrib/tensor_forest/hybrid/core/ops/routing_function_op.cc
-            tensorflow/contrib/tensor_forest/hybrid/core/ops/hard_routing_function_op.cc
-            tensorflow/contrib/tensor_forest/hybrid/core/ops/k_feature_gradient_op.cc
             tensorflow/contrib/tensor_forest/ops/tensor_forest_ops.cc
             tensorflow/contrib/tensor_forest/ops/stats_ops.cc
             tensorflow/contrib/tensor_forest/ops/model_ops.cc
-            tensorflow/contrib/ffmpeg/decode_audio_op.cc
             tensorflow/contrib/tpu/ops/tpu_sendrecv_ops.cc
             tensorflow/contrib/tpu/ops/replication_ops.cc
             tensorflow/contrib/tpu/ops/infeed_ops.cc
@@ -292,7 +472,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/contrib/tpu/ops/tpu_configuration_ops.cc
             tensorflow/contrib/tensor_forest/hybrid/core/ops/utils.cc
             tensorflow/compiler/tf2xla/ops/functional_ops.cc
-            tensorflow/core/user_ops/fact.cc
             tensorflow/core/ops/nn_ops.cc
             tensorflow/core/ops/math_grad.cc
             tensorflow/core/ops/io_ops.cc
@@ -307,7 +486,6 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/ops/word2vec_ops.cc
             tensorflow/core/ops/lookup_ops.cc
             tensorflow/core/ops/stateless_random_ops.cc
-            tensorflow/core/ops/function_ops.cc
             tensorflow/core/ops/string_ops.cc
             tensorflow/core/ops/control_flow_ops.cc
             tensorflow/core/ops/spectral_ops.cc
@@ -334,7 +512,8 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/framework/kernel_def_builder.cc
             tensorflow/core/ops/remote_fused_graph_ops.cc
             tensorflow/core/common_runtime/parallel_concat_optimizer.cc
-            tensorflow/contrib/ffmpeg/encode_audio_op.cc
+            tensorflow/c/c_api.cc
+            third_party/fft2d/fftsg.c
             third_party/protobuf/google/protobuf/message.cc
             third_party/protobuf/google/protobuf/stubs/once.cc
             third_party/protobuf/google/protobuf/generated_message_util.cc
@@ -369,7 +548,6 @@ add_library(tensorflow_inference SHARED
             third_party/protobuf/google/protobuf/io/zero_copy_stream.cc
             third_party/protobuf/google/protobuf/repeated_field.cc
             third_party/protobuf/google/protobuf/any.cc
-            tensorflow/c/c_api.cc
             )
 
 target_include_directories(tensorflow_inference PRIVATE
