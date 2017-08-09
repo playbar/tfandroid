@@ -25,6 +25,13 @@ limitations under the License.
 #include "tensorflow/core/protobuf/config.pb_text.h"
 #include "tensorflow/core/public/session_options.h"
 
+#include <android/log.h>
+
+#define LOG_TAG "tfandroid"
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
+#define LOGW(...) __android_log_print(ANDROID_LOG_WARN, LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+
 namespace tensorflow {
 namespace {
 
@@ -70,7 +77,10 @@ Status SessionFactory::GetFactory(const SessionOptions& options,
   mutex_lock l(*get_session_factory_lock());  // could use reader lock
 
   std::vector<std::pair<string, SessionFactory*>> candidate_factories;
+    SessionFactories *pTmp = session_factories();
+    LOGE("F:%s, %d, size:%d", __FUNCTION__, __LINE__, pTmp->size() );
   for (const auto& session_factory : *session_factories()) {
+      LOGE("F:%s, %d, name:%s", __FUNCTION__, __LINE__, session_factory.first.c_str() );
     if (session_factory.second->AcceptsOptions(options)) {
       VLOG(2) << "SessionFactory type " << session_factory.first
               << " accepts target: " << options.target;
