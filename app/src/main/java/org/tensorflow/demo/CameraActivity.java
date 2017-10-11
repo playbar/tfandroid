@@ -64,7 +64,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
   protected int previewWidth = 0;
   protected int previewHeight = 0;
   protected Bitmap croppedBitmap = null;
-  protected static final boolean SAVE_PREVIEW_BITMAP = false;
+  protected static final boolean SAVE_PREVIEW_BITMAP = true;
   protected long lastProcessingTimeMs;
   protected Bitmap cropCopyBitmap;
   protected ResultsView resultsView;

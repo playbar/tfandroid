@@ -163,7 +163,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             final long startTime = SystemClock.uptimeMillis();
             final List<Classifier.Recognition> results = classifier.recognizeImage(croppedBitmap);
             lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
-            LOGGER.i("Detect: %s", results);
+            LOGGER.i("Detect: %s, time:%d", results, lastProcessingTimeMs);
             cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
             if (resultsView==null) {
               resultsView = (ResultsView) findViewById(R.id.results);
