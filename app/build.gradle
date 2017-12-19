@@ -16,16 +16,16 @@ android {
             }
         }
     }
-    buildTypes {
-        sit{
-            minifyEnabled false
-            debuggable true
-        }
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+//    buildTypes {
+//        sit{
+//            minifyEnabled false
+//            debuggable true
+//        }
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+//    }
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']

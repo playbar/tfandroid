@@ -28,7 +28,7 @@ elseif(ANDROID_ABI MATCHES "^arm64-v8a")
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTANDALONE_DEMO_LIB \
-                    -std=c++11 -fno-exceptions -frtti -O2 -Wno-narrowing \
+                    -std=c++11 -fno-exceptions -frtti -Os -Wno-narrowing \
                     -fPIE \
                     -DHAVE_PTHREAD \
                      ")

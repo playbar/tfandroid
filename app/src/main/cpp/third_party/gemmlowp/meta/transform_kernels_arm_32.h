@@ -5502,107 +5502,107 @@ inline void Transform1DKernel<uint8_t, int32_t, BiasAdd<uint8_t>, 16,
 #endif
 #endif
   int params_rows_copy = params.rows;
-  asm volatile(
-      "ldr r0, %[input_range_min]\n"
-      "vdup.32 q8, r0\n"
-      "ldr r0, %[input_range_scale]\n"
-      "vdup.32 q9, r0\n"
-      "ldr r0, %[bias_range_min]\n"
-      "vdup.32 q10, r0\n"
-      "ldr r0, %[bias_range_scale]\n"
-      "vdup.32 q11, r0\n"
-      "ldr r0, %[output_range_min]\n"
-      "vdup.32 q12, r0\n"
-      "ldr r0, %[one_over_output_range_scale]\n"
-      "vdup.32 q13, r0\n"
-      "ldr r0, %[output_range_offset]\n"
-      "vdup.32 q14, r0\n"
-      "1:"
-      "mov r0, %[count]\n"
-      "mov r1, %[bias]\n"
-      "2:"
-      "subs r0, r0, #16\n"
-
-      // BiasAdd::Transform
-      "vld1.32 {d0, d1}, [%[input]]!\n"
-      "vld1.32 {d8, d9}, [r1]!\n"
-      "pld [%[input], #32]\n"
-      "vmovl.u8 q1, d1\n"
-      "vmovl.u8 q0, d0\n"
-      "vmovl.u8 q5, d9\n"
-      "vmovl.u8 q4, d8\n"
-      "vmovl.s16 q3, d3\n"
-      "vmovl.s16 q2, d2\n"
-      "vmovl.s16 q7, d11\n"
-      "vmovl.s16 q6, d10\n"
-      "vmovl.s16 q1, d1\n"
-      "vmovl.s16 q0, d0\n"
-      "vmovl.s16 q5, d9\n"
-      "vmovl.s16 q4, d8\n"
-      "vcvt.f32.s32 q0, q0\n"
-      "vcvt.f32.s32 q1, q1\n"
-      "vcvt.f32.s32 q2, q2\n"
-      "vcvt.f32.s32 q3, q3\n"
-      "vcvt.f32.s32 q4, q4\n"
-      "vcvt.f32.s32 q5, q5\n"
-      "vcvt.f32.s32 q6, q6\n"
-      "vcvt.f32.s32 q7, q7\n"
-      "vmul.f32 q0, q0, q9\n"
-      "vmul.f32 q1, q1, q9\n"
-      "vmul.f32 q2, q2, q9\n"
-      "vmul.f32 q3, q3, q9\n"
-      "vmul.f32 q4, q4, q11\n"
-      "vmul.f32 q5, q5, q11\n"
-      "vmul.f32 q6, q6, q11\n"
-      "vmul.f32 q7, q7, q11\n"
-      "vadd.f32 q0, q0, q8\n"
-      "vadd.f32 q1, q1, q8\n"
-      "vadd.f32 q2, q2, q8\n"
-      "vadd.f32 q3, q3, q8\n"
-      "vadd.f32 q4, q4, q10\n"
-      "vadd.f32 q5, q5, q10\n"
-      "vadd.f32 q6, q6, q10\n"
-      "vadd.f32 q7, q7, q10\n"
-      "vadd.f32 q0, q0, q4\n"
-      "vadd.f32 q1, q1, q5\n"
-      "vadd.f32 q2, q2, q6\n"
-      "vadd.f32 q3, q3, q7\n"
-      "vsub.f32 q0, q0, q12\n"
-      "vsub.f32 q1, q1, q12\n"
-      "vsub.f32 q2, q2, q12\n"
-      "vsub.f32 q3, q3, q12\n"
-      "vmul.f32 q0, q0, q13\n"
-      "vmul.f32 q1, q1, q13\n"
-      "vmul.f32 q2, q2, q13\n"
-      "vmul.f32 q3, q3, q13\n"
-      "vadd.f32 q0, q0, q14\n"
-      "vadd.f32 q1, q1, q14\n"
-      "vadd.f32 q2, q2, q14\n"
-      "vadd.f32 q3, q3, q14\n"
-      "vcvt.s32.f32 q0, q0\n"
-      "vcvt.s32.f32 q1, q1\n"
-      "vcvt.s32.f32 q2, q2\n"
-      "vcvt.s32.f32 q3, q3\n"
-
-      "vst1.32 {d0, d1, d2, d3}, [%[output]]!\n"
-      "vst1.32 {d4, d5, d6, d7}, [%[output]]!\n"
-      "pld [%[output]]\n"
-      "bne 2b\n"
-      "subs %[rows], %[rows], #1\n"
-      "bne 1b\n"
-      : [input] "+r"(input), [output] "+r"(output)
-      : [count] "r"(params.count), [rows] "r"(params_rows_copy),
-        [output_range_offset] "m"(params.output_range_offset),
-        [input_range_scale] "m"(params.input_range_scale),
-        [one_over_output_range_scale] "m"(params.one_over_output_range_scale),
-        [bias_range_min] "m"(params.bias_range_min),
-        [output_range_min] "m"(params.output_range_min),
-        [bias_range_scale] "m"(params.bias_range_scale),
-        [bias] "r"(params.bias), [input_range_min] "m"(params.input_range_min)
-      : "r0", "r1", "d0", "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9",
-        "d10", "d11", "d12", "d13", "d14", "d15", "d16", "d17", "d18", "d19",
-        "d20", "d21", "d22", "d23", "d24", "d25", "d26", "d27", "d28", "d29",
-        "cc", "memory");
+//  asm volatile(
+//      "ldr r0, %[input_range_min]\n"
+//      "vdup.32 q8, r0\n"
+//      "ldr r0, %[input_range_scale]\n"
+//      "vdup.32 q9, r0\n"
+//      "ldr r0, %[bias_range_min]\n"
+//      "vdup.32 q10, r0\n"
+//      "ldr r0, %[bias_range_scale]\n"
+//      "vdup.32 q11, r0\n"
+//      "ldr r0, %[output_range_min]\n"
+//      "vdup.32 q12, r0\n"
+//      "ldr r0, %[one_over_output_range_scale]\n"
+//      "vdup.32 q13, r0\n"
+//      "ldr r0, %[output_range_offset]\n"
+//      "vdup.32 q14, r0\n"
+//      "1:"
+//      "mov r0, %[count]\n"
+//      "mov r1, %[bias]\n"
+//      "2:"
+//      "subs r0, r0, #16\n"
+//
+//      // BiasAdd::Transform
+//      "vld1.32 {d0, d1}, [%[input]]!\n"
+//      "vld1.32 {d8, d9}, [r1]!\n"
+//      "pld [%[input], #32]\n"
+//      "vmovl.u8 q1, d1\n"
+//      "vmovl.u8 q0, d0\n"
+//      "vmovl.u8 q5, d9\n"
+//      "vmovl.u8 q4, d8\n"
+//      "vmovl.s16 q3, d3\n"
+//      "vmovl.s16 q2, d2\n"
+//      "vmovl.s16 q7, d11\n"
+//      "vmovl.s16 q6, d10\n"
+//      "vmovl.s16 q1, d1\n"
+//      "vmovl.s16 q0, d0\n"
+//      "vmovl.s16 q5, d9\n"
+//      "vmovl.s16 q4, d8\n"
+//      "vcvt.f32.s32 q0, q0\n"
+//      "vcvt.f32.s32 q1, q1\n"
+//      "vcvt.f32.s32 q2, q2\n"
+//      "vcvt.f32.s32 q3, q3\n"
+//      "vcvt.f32.s32 q4, q4\n"
+//      "vcvt.f32.s32 q5, q5\n"
+//      "vcvt.f32.s32 q6, q6\n"
+//      "vcvt.f32.s32 q7, q7\n"
+//      "vmul.f32 q0, q0, q9\n"
+//      "vmul.f32 q1, q1, q9\n"
+//      "vmul.f32 q2, q2, q9\n"
+//      "vmul.f32 q3, q3, q9\n"
+//      "vmul.f32 q4, q4, q11\n"
+//      "vmul.f32 q5, q5, q11\n"
+//      "vmul.f32 q6, q6, q11\n"
+//      "vmul.f32 q7, q7, q11\n"
+//      "vadd.f32 q0, q0, q8\n"
+//      "vadd.f32 q1, q1, q8\n"
+//      "vadd.f32 q2, q2, q8\n"
+//      "vadd.f32 q3, q3, q8\n"
+//      "vadd.f32 q4, q4, q10\n"
+//      "vadd.f32 q5, q5, q10\n"
+//      "vadd.f32 q6, q6, q10\n"
+//      "vadd.f32 q7, q7, q10\n"
+//      "vadd.f32 q0, q0, q4\n"
+//      "vadd.f32 q1, q1, q5\n"
+//      "vadd.f32 q2, q2, q6\n"
+//      "vadd.f32 q3, q3, q7\n"
+//      "vsub.f32 q0, q0, q12\n"
+//      "vsub.f32 q1, q1, q12\n"
+//      "vsub.f32 q2, q2, q12\n"
+//      "vsub.f32 q3, q3, q12\n"
+//      "vmul.f32 q0, q0, q13\n"
+//      "vmul.f32 q1, q1, q13\n"
+//      "vmul.f32 q2, q2, q13\n"
+//      "vmul.f32 q3, q3, q13\n"
+//      "vadd.f32 q0, q0, q14\n"
+//      "vadd.f32 q1, q1, q14\n"
+//      "vadd.f32 q2, q2, q14\n"
+//      "vadd.f32 q3, q3, q14\n"
+//      "vcvt.s32.f32 q0, q0\n"
+//      "vcvt.s32.f32 q1, q1\n"
+//      "vcvt.s32.f32 q2, q2\n"
+//      "vcvt.s32.f32 q3, q3\n"
+//
+//      "vst1.32 {d0, d1, d2, d3}, [%[output]]!\n"
+//      "vst1.32 {d4, d5, d6, d7}, [%[output]]!\n"
+//      "pld [%[output]]\n"
+//      "bne 2b\n"
+//      "subs %[rows], %[rows], #1\n"
+//      "bne 1b\n"
+//      : [input] "+r"(input), [output] "+r"(output)
+//      : [count] "r"(params.count), [rows] "r"(params_rows_copy),
+//        [output_range_offset] "m"(params.output_range_offset),
+//        [input_range_scale] "m"(params.input_range_scale),
+//        [one_over_output_range_scale] "m"(params.one_over_output_range_scale),
+//        [bias_range_min] "m"(params.bias_range_min),
+//        [output_range_min] "m"(params.output_range_min),
+//        [bias_range_scale] "m"(params.bias_range_scale),
+//        [bias] "r"(params.bias), [input_range_min] "m"(params.input_range_min)
+//      : "r0", "r1", "d0", "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9",
+//        "d10", "d11", "d12", "d13", "d14", "d15", "d16", "d17", "d18", "d19",
+//        "d20", "d21", "d22", "d23", "d24", "d25", "d26", "d27", "d28", "d29",
+//        "cc", "memory");
 }
 
 template <>
