@@ -19,7 +19,7 @@ cmake_minimum_required(VERSION 3.4.1)
 
 set(CMAKE_VERBOSE_MAKEFILE on)
 
-set(CMAKE_BUILD_TYPE "Release")
+#set(CMAKE_BUILD_TYPE "Release")
 
 if (ANDROID_ABI MATCHES "^armeabi-v7a$")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfloat-abi=softfp -mfpu=neon")
@@ -84,7 +84,7 @@ add_library(tensorflow_inference SHARED
             tensorflow/core/protobuf/rewriter_config.pb.cc
             tensorflow/core/protobuf/debug.pb.cc
             tensorflow/core/protobuf/device_properties.pb.cc
-             tensorflow/core/lib/core/error_codes.pb.cc
+            tensorflow/core/lib/core/error_codes.pb.cc
             tensorflow/core/framework/resource_handle.cc
             tensorflow/core/framework/allocator.cc
             tensorflow/core/framework/allocator_registry.cc
