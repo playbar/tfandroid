@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
+#include <log.h>
 #include "tensorflow/core/framework/kernel_def_builder.h"
 #include "tensorflow/core/framework/attr_value.pb.h"
 #include "tensorflow/core/framework/kernel_def.pb_text.h"
@@ -21,6 +22,7 @@ limitations under the License.
 namespace tensorflow {
 
 KernelDefBuilder::KernelDefBuilder(const char* op_name) {
+  LOGE("Fun:%s, Line:%d, op_name=%s, tid=%d", __FUNCTION__, __LINE__, op_name, gettid() );
   kernel_def_ = new KernelDef;
   kernel_def_->set_op(op_name);
 }

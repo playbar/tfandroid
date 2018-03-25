@@ -27,7 +27,7 @@ limitations under the License.
 #include "tensorflow/core/platform/mutex.h"
 #include "tensorflow/core/platform/protobuf.h"
 #include "tensorflow/core/platform/types.h"
-#include "tensorflow/c/log.h"
+#include "log.h"
 
 namespace tensorflow {
 
@@ -200,7 +200,7 @@ Status OpRegistry::RegisterAlreadyLocked(const OpRegistrationDataFactory& op_dat
     {
       s = errors::AlreadyExists("Op with name ", op_reg_data->op_def.name());
     }
-    LOGE("%s, %d, name:%s", __FUNCTION__, __LINE__, op_reg_data->op_def.name().c_str() );
+    LOGE("Fun:%s, Line:%d, name=%s", __FUNCTION__, __LINE__, op_reg_data->op_def.name().c_str() );
   }
   Status watcher_status = s;
   if (watcher_) {
