@@ -178,15 +178,12 @@ JNIEXPORT jbyteArray JNICALL Java_org_tensorflow_Session_run(
   unique_tf_buffer run_metadata(
       MakeUniqueBuffer(want_run_metadata ? TF_NewBuffer() : nullptr));
 
-  resolveHandles(env, "input Tensors", input_tensor_handles, input_values.get(),
-                 ninputs);
-  resolveOutputs(env, "input", input_op_handles, input_op_indices, inputs.get(),
-                 ninputs);
-  resolveOutputs(env, "output", output_op_handles, output_op_indices,
-                 outputs.get(), noutputs);
-  resolveHandles(env, "target Operations", target_op_handles, targets.get(),
-                 ntargets);
-  if (env->ExceptionCheck()) return nullptr;
+  resolveHandles(env, "input Tensors", input_tensor_handles, input_values.get(), ninputs);
+  resolveOutputs(env, "input", input_op_handles, input_op_indices, inputs.get(), ninputs);
+  resolveOutputs(env, "output", output_op_handles, output_op_indices, outputs.get(), noutputs);
+  resolveHandles(env, "target Operations", target_op_handles, targets.get(), ntargets);
+  if (env->ExceptionCheck())
+    return nullptr;
 
   TF_Status* status = TF_NewStatus();
 
@@ -196,8 +193,7 @@ JNIEXPORT jbyteArray JNICALL Java_org_tensorflow_Session_run(
     size_t sz = env->GetArrayLength(jrun_options);
     if (sz > 0) {
       jrun_options_data = env->GetByteArrayElements(jrun_options, nullptr);
-      run_options.reset(
-          TF_NewBufferFromString(static_cast<void*>(jrun_options_data), sz));
+      run_options.reset(TF_NewBufferFromString(static_cast<void*>(jrun_options_data), sz));
     }
   }
 

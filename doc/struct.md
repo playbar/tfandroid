@@ -15,6 +15,8 @@ TensorFlowInferenceInterface
  5. Session.Runner->run->runHelper
  6. Java_org_tensorflow_Session_run
  7. TF_SessionRun
+ 8. TF_Run_Helper
+ 9. DirectSession::Run
 
 
 核心基类 OpKernel

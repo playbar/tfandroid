@@ -725,6 +725,7 @@ add_library(tensorflow_inference SHARED
 
 target_include_directories(tensorflow_inference PRIVATE
                            ${CMAKE_SOURCE_DIR}/
+                           ${CMAKE_SOURCE_DIR}/app/src/main/cpp
                            ${CMAKE_SOURCE_DIR}/third_party/eigen3
                            ${CMAKE_SOURCE_DIR}/third_party/protobuf
                            ${CMAKE_SOURCE_DIR}/third_party/gemmlowp
@@ -741,12 +742,12 @@ target_link_libraries(tensorflow_inference
 #########################################################
 MESSAGE(STATUS "Project: tensorflow_demo")
 
-get_filename_component(SAMPLE_SRC_DIR  ${CMAKE_SOURCE_DIR}  ABSOLUTE)
-file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/demo/*.*)
+get_filename_component(SAMPLE_SRC_DIR  ${CMAKE_SOURCE_DIR}/app/src/main/cpp  ABSOLUTE)
+file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/*.*)
 add_library(tensorflow_demo SHARED
             ${tensorflow_demo_sources})
 target_include_directories(tensorflow_demo PRIVATE
-                           ${CMAKE_SOURCE_DIR}/demo/)
+                           ${CMAKE_SOURCE_DIR}/app/src/main/cpp)
 
 target_link_libraries(tensorflow_demo
                       android
