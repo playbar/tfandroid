@@ -17,7 +17,13 @@ TensorFlowInferenceInterface
  7. TF_SessionRun
  8. TF_Run_Helper
  9. DirectSession::Run
-
-
+ 10. ExecutorImpl::RunAsync
+ 11. ExecutorState(args, this))->RunAsync(std::move(done))
+ 12. ExecutorState::ScheduleReady
+ 13. ExecutorState::Process
+ 
+ 
+ 
+ 
 核心基类 OpKernel
 

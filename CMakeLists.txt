@@ -1,21 +1,6 @@
-#
-# Copyright (C) 2016 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-project(TENSORFLOW_DEMO)
 cmake_minimum_required(VERSION 3.4.1)
+
+project(tensorflow_demo)
 
 set(CMAKE_VERBOSE_MAKEFILE on)
 
@@ -35,6 +20,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTANDALONE_DEMO_LIB \
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
                               -Wl,--allow-multiple-definition \
                               -Wl,--whole-archive -fPIE -v")
+
+
 ###########################################
 MESSAGE(STATUS "Project: tensorflow_inference")
 
@@ -725,7 +712,6 @@ add_library(tensorflow_inference SHARED
 
 target_include_directories(tensorflow_inference PRIVATE
                            ${CMAKE_SOURCE_DIR}/
-                           ${CMAKE_SOURCE_DIR}/app/src/main/cpp
                            ${CMAKE_SOURCE_DIR}/third_party/eigen3
                            ${CMAKE_SOURCE_DIR}/third_party/protobuf
                            ${CMAKE_SOURCE_DIR}/third_party/gemmlowp
@@ -747,6 +733,7 @@ file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/*.*)
 add_library(tensorflow_demo SHARED
             ${tensorflow_demo_sources})
 target_include_directories(tensorflow_demo PRIVATE
+                           ${CMAKE_SOURCE_DIR}
                            ${CMAKE_SOURCE_DIR}/app/src/main/cpp)
 
 target_link_libraries(tensorflow_demo

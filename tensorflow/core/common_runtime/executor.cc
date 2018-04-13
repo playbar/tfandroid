@@ -21,6 +21,7 @@ limitations under the License.
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <log.h>
 
 #include "tensorflow/core/common_runtime/costmodel_manager.h"
 #include "tensorflow/core/common_runtime/pending_counts.h"
@@ -1486,6 +1487,7 @@ struct ExecutorState::AsyncState {
 };
 
 void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
+  LOGE("Fun:%s, Line:%d", __FUNCTION__, __LINE__);
   const GraphView& gview = impl_->gview_;
   TaggedNodeSeq ready;
   TaggedNodeReadyQueue inline_ready;
@@ -1688,7 +1690,9 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
   }  // while !inline_ready.empty()
 
   // This thread of computation is done if completed = true.
-  if (completed) Finish();
+  if (completed)
+    Finish();
+  return;
 }
 
 Status ExecutorState::PrepareInputs(const NodeItem& item, Entry* first_input,
