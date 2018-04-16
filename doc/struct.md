@@ -23,7 +23,33 @@ TensorFlowInferenceInterface
  13. ExecutorState::Process
  
  
+# 资源文件
+ * multibox_location_priors.txt
+    1. DetectorActivity.java -> MB_LOCATION_FILE
+    2. TensorFlowMultiBoxDetector.create
+    
+    
+ * imagenet_comp_graph_label_strings.txt
+    1. 
+    2. 
  
+ * multibox_model.pb
+    1. MB_MODEL_FILE
+ 
+ * tensorflow_inception_graph.pb
+    1. ClassifierActivity.java -> MODEL_FILE
+    2. TensorFlowInferenceInterface
+    3. TensorFlowInferenceInterface.java -> loadGraph
+    4. Graph.java -> importGraphDef 
+    5. Java_org_tensorflow_Graph_importGraphDef
+    6. TF_GraphImportGraphDef
+    7. TF_GraphImportGraphDefWithReturnOutputss
+    
+ 
+# 资源文件记载流程
+1. TensorFlowImageClassifier.create
+    
+
  
 核心基类 OpKernel
 

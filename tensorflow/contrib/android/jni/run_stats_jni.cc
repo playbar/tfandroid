@@ -39,8 +39,7 @@ StatSummarizer* requireHandle(JNIEnv* env, jlong handle) {
   JNICALL Java_org_tensorflow_contrib_android_RunStats_##name
 
 JNIEXPORT jlong RUN_STATS_METHOD(allocate)(JNIEnv* env, jclass clazz) {
-  static_assert(sizeof(jlong) >= sizeof(StatSummarizer*),
-                "Cannot package C++ object pointers as a Java long");
+  static_assert(sizeof(jlong) >= sizeof(StatSummarizer*), "Cannot package C++ object pointers as a Java long");
   tensorflow::StatSummarizerOptions opts;
   return reinterpret_cast<jlong>(new StatSummarizer(opts));
 }
