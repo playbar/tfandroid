@@ -733,7 +733,7 @@ file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/*.*)
 add_library(tensorflow_demo SHARED
             ${tensorflow_demo_sources})
 target_include_directories(tensorflow_demo PRIVATE
-                           ${CMAKE_SOURCE_DIR}
+                           ${CMAKE_SOURCE_DIR}/../
                            ${CMAKE_SOURCE_DIR}/src/main/cpp)
 
 target_link_libraries(tensorflow_demo
