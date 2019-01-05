@@ -73,3 +73,4 @@ gen-external-apklibs
 # End of https://www.gitignore.io/api/android
 .idea/
 *.gitignore
+tensorflow/contrib/cmake/cmake-build-debug

@@ -1120,8 +1120,8 @@ class ExecutorState {
     int64 input_iter = -1;
     bool is_dead = false;
 
-    TaggedNode(const Node* t_node, FrameState* in_frame, int64 in_iter,
-               bool dead) {
+    TaggedNode(const Node* t_node, FrameState* in_frame, int64 in_iter, bool dead)
+    {
       node = t_node;
       input_frame = in_frame;
       input_iter = in_iter;
